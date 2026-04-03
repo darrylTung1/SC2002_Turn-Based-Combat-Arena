@@ -45,6 +45,13 @@ combat/
     └── GameController.java     ← Replay loop simplified
 ```
 
+> **Note:** The package structure above does not match the updated UML class diagram.
+> The updated diagram applies ISP by splitting `GameUI` into two focused interfaces:
+> - `SetupUI` — used only by `GameController` (player/item/difficulty selection, replay prompts)
+> - `BattleUI` — used only by `BattleEngine` (round display, action results, victory/defeat)
+>
+> `CLIView` implements both. If aligning code to the updated diagram, rename/split `GameUI.java` and update `GameController` and `BattleEngine` to reference the correct interface.
+
 
 ### Battle Engine + Game Loop
 **Focus: Make the game actually run end-to-end.**
