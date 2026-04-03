@@ -2,7 +2,7 @@
 
 ## What's Ready
 
-I've set up the full project architecture. You'll find a `.tar.gz` with 23 Java source files across 8 packages. Everything compiles as a coherent skeleton — interfaces, abstract classes, and concrete implementations are all in place with proper SOLID design.
+I've set up the full project architecture. src file contains all the code
 
 Here's the package structure:
 
