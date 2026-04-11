@@ -232,12 +232,19 @@ public class CLIView implements GameUI {
     }
 
     @Override
-    public boolean promptReplay() {
+    public PostBattleChoice promptReplay() {
         System.out.println("\n1. Replay with same settings");
         System.out.println("2. New game");
         System.out.println("3. Exit");
         System.out.print("Choose: ");
-        return readInt(1, 3) == 1;
+
+        int choice = readInt(1, 3);
+        return switch (choice) {
+            case 1 -> PostBattleChoice.REPLAY;
+            case 2 -> PostBattleChoice.NEW_GAME;
+            case 3 -> PostBattleChoice.EXIT;
+            default -> PostBattleChoice.EXIT;
+        };
     }
 
     @Override
