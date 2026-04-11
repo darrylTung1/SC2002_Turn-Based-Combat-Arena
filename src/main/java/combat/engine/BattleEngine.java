@@ -106,14 +106,14 @@ public class BattleEngine {
 
     private void executePlayerTurn(Player player) {
         Action action = ui.getPlayerAction(player, context);
+        ui.displayActionResult(player, action, context);
         action.execute(player, context);
         player.decrementCooldown();
-        ui.displayActionResult(player, action, context);
     }
 
     private void executeEnemyTurn(Enemy enemy) {
         Action action = enemy.getActionStrategy().chooseAction(enemy, context);
-        action.execute(enemy, context);
         ui.displayActionResult(enemy, action, context);
+        action.execute(enemy, context);
     }
 }
