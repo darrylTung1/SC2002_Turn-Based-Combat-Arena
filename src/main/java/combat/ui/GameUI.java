@@ -43,7 +43,7 @@ public interface GameUI {
     /**
      * @return true if the player wants to replay
      */
-    boolean promptReplay();
+    PostBattleChoice promptReplay();
 
     /**
      * @return true if the player wants to start a new game (vs exit)
