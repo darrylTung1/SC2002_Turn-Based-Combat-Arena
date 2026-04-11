@@ -45,6 +45,8 @@ combat/
     └── GameController.java     ← Replay loop simplified
 ```
 
+> **UML Class Diagram (Lucidchart):** https://lucid.app/lucidchart/3fd8394d-cad6-49ed-84bd-b97cbef9c7b7/edit?viewport_loc=566%2C-277%2C5372%2C2583%2CHWEp-vi-RSFO&invitationId=inv_2a694528-77c5-4057-8a57-f8af177ce038
+
 > **Note:** The package structure above does not match the updated UML class diagram.
 > The updated diagram applies ISP by splitting `GameUI` into two focused interfaces:
 > - `SetupUI` — used only by `GameController` (player/item/difficulty selection, replay prompts)
