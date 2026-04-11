@@ -1,10 +1,13 @@
 package combat.ui;
 
 import combat.engine.BattleEngine;
+import combat.engine.BattleResult;
 import combat.item.Item;
 import combat.level.Difficulty;
 import combat.level.Level;
 import combat.model.Player;
+import combat.model.Warrior;
+import combat.model.Wizard;
 import combat.strategy.SpeedBasedTurnOrder;
 
 import java.util.List;
@@ -26,31 +29,55 @@ public class GameController {
 
         while (running) {
             // Setup phase
-            Player player = ui.selectPlayer();
+        	Player originalPlayer = ui.selectPlayer();
             List<Item> items = ui.selectItems();
-            items.forEach(player::addItem);
+            
             Difficulty difficulty = ui.selectDifficulty();
 
-            // Create level
             int levelNumber = switch (difficulty) {
                 case EASY -> 1;
                 case MEDIUM -> 2;
                 case HARD -> 3;
             };
-            Level level = new Level(difficulty, levelNumber);
 
-            // Create engine with strategy injection (DIP)
-            BattleEngine engine = new BattleEngine(
-                    new SpeedBasedTurnOrder(),
-                    ui
-            );
+            boolean inCurrentSetup = true;
 
-            // Run battle
-            engine.startBattle(player, level);
+            while (running && inCurrentSetup) {
+            	Player battlePlayer;
 
-            // Post-game
-            if (!ui.promptReplay()) {
-                running = ui.promptNewGame();
+                if (originalPlayer instanceof Warrior) {
+                    battlePlayer = new Warrior();
+                } else {
+                    battlePlayer = new Wizard();
+                }
+
+                items.forEach(battlePlayer::addItem);
+                Level level = new Level(difficulty, levelNumber);
+                BattleEngine engine = new BattleEngine(
+                        new SpeedBasedTurnOrder(),
+                        ui
+                );
+
+                BattleResult result = engine.startBattle(battlePlayer, level);
+
+                if (result == BattleResult.DEFEAT) {
+                    PostBattleChoice choice = ui.promptReplay();
+
+                    switch (choice) {
+                        case REPLAY -> {
+                            // same settings, battle restarts
+                        }
+                        case NEW_GAME -> inCurrentSetup = false;
+                        case EXIT -> {
+                            running = false;
+                            inCurrentSetup = false;
+                        }
+                    }
+                } else {
+                    // Win -> exit directly
+                    running = false;
+                    inCurrentSetup = false;
+                }
             }
         }
 
