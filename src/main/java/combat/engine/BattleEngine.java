@@ -79,7 +79,7 @@ public class BattleEngine {
             // Check stun
             if (combatant.hasEffect(StunEffect.class)) {
                 ui.displayStunned(combatant);
-                combatant.tickEffects();
+                // combatant.tickEffects();
                 // Decrement cooldown even if stunned (turn still counted)
                 if (combatant instanceof Player player) {
                     player.decrementCooldown();
@@ -95,12 +95,17 @@ public class BattleEngine {
             }
 
             // Tick status effects at end of turn
-            combatant.tickEffects();
+            // combatant.tickEffects();
 
             // Check for game-ending condition after each action
             if (context.isPlayerDefeated() || context.allEnemiesDefeated()) {
                 break;
             }
+        }
+
+        for (Combatant combatant : turnOrder) {
+            if (!combatant.isAlive()) continue;
+            combatant.tickEffects();
         }
     }
 
