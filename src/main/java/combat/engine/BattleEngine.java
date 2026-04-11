@@ -33,7 +33,7 @@ public class BattleEngine {
      * @param player the player combatant
      * @param level  the level configuration
      */
-    public void startBattle(Player player, Level level) {
+    public BattleResult startBattle(Player player, Level level){
         // Initialize context with initial spawn
         context = new BattleContext(player, level.getInitialSpawn());
         backupSpawned = false;
@@ -61,8 +61,10 @@ public class BattleEngine {
         // Display result
         if (context.isPlayerDefeated()) {
             ui.displayDefeat(context);
+            return BattleResult.DEFEAT;
         } else {
             ui.displayVictory(context);
+            return BattleResult.VICTORY;
         }
     }
 
