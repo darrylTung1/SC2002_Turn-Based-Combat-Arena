@@ -2,11 +2,10 @@ package combat.model;
 
 import combat.strategy.EnemyActionStrategy;
 
-/**
- * Abstract base class for enemy combatants.
- * DIP: Enemy depends on EnemyActionStrategy abstraction,
- * allowing future behavior variations without modifying Enemy.
- */
+// Abstract base class for enemy combatants
+
+// DIP: Enemy depends on EnemyActionStrategy abstraction - allows future behaviour variation without modifying Enemy
+
 public abstract class Enemy extends Combatant {
     private final EnemyActionStrategy actionStrategy;
 

@@ -5,10 +5,8 @@ import combat.item.Item;
 import combat.model.Combatant;
 import combat.model.Player;
 
-/**
- * Action to use an item from the player's inventory.
- * Item is consumed after use.
- */
+// Use item from player's inventory; Item consumed after use
+
 public class UseItemAction implements Action {
     private Item selectedItem;
 

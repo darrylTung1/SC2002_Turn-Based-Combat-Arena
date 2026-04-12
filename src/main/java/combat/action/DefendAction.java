@@ -4,10 +4,10 @@ import combat.engine.BattleContext;
 import combat.effect.DefendBuff;
 import combat.model.Combatant;
 
-/**
- * Defend action.
- * Increases defense by 10 for the current round and the next round (2 turns).
- */
+// Defend action
+
+// Increases defense by 10 for current and next round [2 turns]
+
 public class DefendAction implements Action {
 
     @Override

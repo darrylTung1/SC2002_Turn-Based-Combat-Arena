@@ -3,10 +3,9 @@ package combat.model;
 import combat.effect.StunEffect;
 import java.util.List;
 
-/**
- * Warrior player class.
- * Special Skill: Shield Bash — deals BasicAttack damage to target, stuns for 2 turns.
- */
+// Warrior player class.
+ // Special Skill: Shield Bash — deals BasicAttack damage to target, stuns for 2 turns.
+
 public class Warrior extends Player {
     private static final int MAX_HP = 260;
     private static final int ATTACK = 40;

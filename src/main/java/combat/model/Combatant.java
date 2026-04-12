@@ -4,11 +4,11 @@ import combat.effect.StatusEffect;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Abstract base class for all entities in combat.
- * SRP: Holds combatant state and manages status effects.
- * LSP: Player and Enemy are interchangeable as Combatant.
- */
+// Abstract base class for all entities in combat
+
+// SRP: Holds combatant state and manages status effects.
+// LSP: Player and Enemy are interchangeable as Combatant.
+
 public abstract class Combatant {
     private final String name;
     private int hp;
@@ -32,13 +32,12 @@ public abstract class Combatant {
         this.statusEffects = new ArrayList<>();
     }
 
-    // --- HP Management ---
+    // HP Management 
 
-    /**
-     * Apply raw damage to this combatant (HP clamped at 0).
-     * Damage formula (ATK - DEF) is calculated by the Action, not here.
-     * SRP: Combatant manages state; Action calculates damage.
-     */
+    // HP no lower than 0
+    // Apply raw damage to this combatant
+    // Damage formulat (ATK-DEF) calculated by Actino
+    // SRP: Combatant manages state; Action calculates damage
     public void takeDamage(int rawDamage) {
         this.hp = Math.max(0, this.hp - Math.max(0, rawDamage));
     }
@@ -51,7 +50,7 @@ public abstract class Combatant {
         return this.hp > 0;
     }
 
-    // --- Status Effect Management ---
+    // Status Effect Management
     public void addStatusEffect(StatusEffect effect) {
         this.statusEffects.add(effect);
     }
@@ -83,7 +82,7 @@ public abstract class Combatant {
         return new ArrayList<>(statusEffects);
     }
 
-    // --- Stat Modification ---
+    // Stat Modification
     public void modifyAttack(int amount) {
         this.attack += amount;
     }

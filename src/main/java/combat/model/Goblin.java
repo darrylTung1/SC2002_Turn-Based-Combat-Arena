@@ -2,9 +2,7 @@ package combat.model;
 
 import combat.strategy.BasicAttackOnlyStrategy;
 
-/**
- * Goblin enemy type.
- */
+// Goblin enemy type.
 public class Goblin extends Enemy {
     private static final int MAX_HP = 55;
     private static final int ATTACK = 35;

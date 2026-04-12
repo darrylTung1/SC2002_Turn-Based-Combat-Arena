@@ -3,11 +3,10 @@ package combat.model;
 import combat.effect.ArcaneBlastBuff;
 import java.util.List;
 
-/**
- * Wizard player class.
- * Special Skill: Arcane Blast — deals BasicAttack damage to ALL enemies.
- * Each kill adds +10 ATK lasting until end of level (tracked via ArcaneBlastBuff).
- */
+// Wizard player class.
+ // Special Skill: Arcane Blast — deals BasicAttack damage to ALL enemies.
+ // Each kill adds +10 ATK lasting until end of level (tracked via ArcaneBlastBuff).
+
 public class Wizard extends Player {
     private static final int MAX_HP = 200;
     private static final int ATTACK = 50;
