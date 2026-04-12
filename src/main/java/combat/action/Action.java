@@ -3,31 +3,22 @@ package combat.action;
 import combat.engine.BattleContext;
 import combat.model.Combatant;
 
-/**
- * Interface for all combat actions.
- * OCP: New actions can be added by implementing this interface
- * without modifying BattleEngine.
- * DIP: BattleEngine depends on this abstraction, not concrete actions.
- */
+// Interface for all combat actions. 
+
 public interface Action {
 
-    /**
-     * Execute this action.
-     * @param actor      the combatant performing the action
-     * @param context    the current battle state
-     */
+    // Execute this action. 
+    // actor: combatant performing the action
+    // context: current battle state 
     void execute(Combatant actor, BattleContext context);
 
-    /**
-     * @return display name of this action for the UI
-     */
+    // return display name of this action 
     String getName();
 
-    /**
-     * Check if this action can be performed by the actor in the current context.
-     * @param actor   the combatant attempting the action
-     * @param context the current battle state
-     * @return true if the action is available
-     */
+    // Check if this action can be performed by the actor in the current context.
+    // actor: the combatant attempting the action
+    // context: the current battle state
+    
     boolean isAvailable(Combatant actor, BattleContext context);
+    // returns true if the action is available
 }

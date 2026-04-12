@@ -3,11 +3,12 @@ package combat.action;
 import combat.engine.BattleContext;
 import combat.model.Combatant;
 
-/**
- * Basic attack action.
- * Damage = max(0, Attacker ATK - Target DEF).
- * Minimum HP post-damage is 0.
- */
+// Basic attack action
+
+// Formula: Damage = max(0, Attacker ATK - Target DEF)
+
+// HP cannot go below 0
+
 public class BasicAttack implements Action {
     private Combatant target;
 
@@ -21,8 +22,7 @@ public class BasicAttack implements Action {
     public void execute(Combatant actor, BattleContext context) {
         if (target == null || !target.isAlive()) return;
 
-        // Check if SmokeBomb effect is active on the target (player)
-        // SmokeBomb makes enemy attacks do 0 damage
+        // Check if SmokeBomb effect is active on the target (player) -> if SmokeBomb is active then enemy attacks do 0 damage.
         if (context.isSmokeBombActive() && actor instanceof combat.model.Enemy) {
             // 0 damage due to smoke bomb
             return;
@@ -39,7 +39,7 @@ public class BasicAttack implements Action {
 
     @Override
     public boolean isAvailable(Combatant actor, BattleContext context) {
-        return true; // Always available
+        return true;
     }
 
     public Combatant getTarget() {

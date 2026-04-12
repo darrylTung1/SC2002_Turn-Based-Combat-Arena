@@ -4,10 +4,8 @@ import combat.engine.BattleContext;
 import combat.model.Combatant;
 import combat.model.Player;
 
-/**
- * Action to execute the player's class-specific special ability.
- * Cooldown: 3 turns (including current round).
- */
+// Execute player's class-specific special ability [Cooldown: 3 turns incl. current round]
+
 public class SpecialSkillAction implements Action {
     private Combatant target;
 
