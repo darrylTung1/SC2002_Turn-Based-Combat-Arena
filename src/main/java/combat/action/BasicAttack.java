@@ -9,17 +9,18 @@ import combat.model.Combatant;
 
 // HP cannot go below 0
 
-public class BasicAttack implements Action {
-    private Combatant target;
+public class BasicAttack extends TargetAction {
+    // private Combatant target;
 
-    public BasicAttack() {}
+    // public BasicAttack() {}
 
-    public void setTarget(Combatant target) {
-        this.target = target;
-    }
+    // public void setTarget(Combatant target) {
+    //     this.target = target;
+    // }
 
     @Override
     public void execute(Combatant actor, BattleContext context) {
+        Combatant target = getTarget();
         if (target == null || !target.isAlive()) return;
 
         // Check if SmokeBomb effect is active on the target (player) -> if SmokeBomb is active then enemy attacks do 0 damage.
@@ -42,7 +43,7 @@ public class BasicAttack implements Action {
         return true;
     }
 
-    public Combatant getTarget() {
-        return target;
-    }
+    // public Combatant getTarget() {
+    //     return target;
+    // }
 }

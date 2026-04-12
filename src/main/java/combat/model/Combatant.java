@@ -99,7 +99,7 @@ public abstract class Combatant {
         this.attack = baseAttack;
     }
 
-    // --- Getters ---
+    // Getters
     public String getName() { return name; }
     public int getHp() { return hp; }
     public int getMaxHp() { return maxHp; }

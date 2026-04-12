@@ -7,13 +7,17 @@ import combat.model.Player;
 
 // Use item from player's inventory; Item consumed after use
 
-public class UseItemAction implements Action {
+public class UseItemAction extends TargetAction {
     private Item selectedItem;
 
     public void setSelectedItem(Item item) {
         this.selectedItem = item;
     }
 
+    public Item getSelectedItem() {
+        return selectedItem;
+    }
+    
     @Override
     public void execute(Combatant actor, BattleContext context) {
         if (!(actor instanceof Player player)) return;
@@ -33,7 +37,5 @@ public class UseItemAction implements Action {
         return (actor instanceof Player player) && player.hasItems();
     }
 
-    public Item getSelectedItem() {
-        return selectedItem;
-    }
+    
 }
