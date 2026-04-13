@@ -29,7 +29,7 @@ public interface GameUI {
     void displayRoundEnd(BattleContext context);
     void displayStunned(Combatant combatant);
     void displayBackupSpawn(List<Enemy> backup);
-    void displayActionResult(Combatant actor, Action action, BattleContext context);
+    void displayActionResult(Combatant actor, Action action, BattleContext context, Combatant target, int oldHp, int newHp);
 
     // --- Player Input ---
     Action getPlayerAction(Player player, BattleContext context);

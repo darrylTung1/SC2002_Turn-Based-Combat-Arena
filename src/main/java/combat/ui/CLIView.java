@@ -118,38 +118,10 @@ public class CLIView implements GameUI {
     }
 
     @Override
-    public void displayActionResult(Combatant actor, Action action, BattleContext context) {
+    public void displayActionResult(Combatant actor, Action action, BattleContext context, Combatant target, int oldHp, int newHp) {
         System.out.println(actor.getName() + " used " + action.getName() + ".");
-        Combatant target;
-        int damage;
-        int newHp;
-        if(action instanceof BasicAttack){
-            if(actor instanceof Player){
-                target = ((BasicAttack) action).getTarget();
-                damage = Math.max(0, actor.getAttack() - target.getDefense());
-                newHp = Math.max(0, target.getHp() - damage);
-                System.out.println(target.getName() + ": HP: " + target.getHp() + " -> " + newHp + " (dmg : " + actor.getAttack() + " - " + target.getDefense() + " = " + damage + ")");
-            }
-            else{ // must be Enemy
-                target = ((BasicAttack) action).getTarget();
-                damage = Math.max(0, actor.getAttack() - target.getDefense());
-                newHp = Math.max(0, target.getHp() - damage);
-                if(context.isSmokeBombActive() == true){
-                    damage = 0;
-                    newHp = Math.max(0, target.getHp() - damage);
-                    System.out.println(target.getName() + ": HP: " + target.getHp() + " -> " + newHp + " (dmg : 0, Player has a Smoke effect)");
-                }
-                else{
-                    System.out.println(target.getName() + ": HP: " + target.getHp() + " -> " + newHp + " (dmg : " + actor.getAttack() + " - " + target.getDefense() + " = " + damage + ")");
-                }
-            }
-        }
-        if(action instanceof UseItemAction){
-            Item item=((UseItemAction) action).getSelectedItem();
-            if(item.getName()=="Potion"){
-                newHp = Math.min(actor.getMaxHp(), actor.getHp() + 100);
-                System.out.println(actor.getName() + ": HP: " + actor.getHp() + " -> " + newHp);
-            }
+        if (target != null) {
+            System.out.println(target.getName() + ": HP " + oldHp + " -> " + newHp);
         }
     }
 
