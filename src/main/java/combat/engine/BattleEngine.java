@@ -1,6 +1,10 @@
 package combat.engine;
 
 import combat.action.Action;
+import combat.action.*  ;
+import combat.item.Item;
+import combat.item.Potion;
+import combat.item.PowerStone;
 import combat.effect.StunEffect;
 import combat.model.Combatant;
 import combat.model.Enemy;
@@ -111,14 +115,56 @@ public class BattleEngine {
 
     private void executePlayerTurn(Player player) {
         Action action = ui.getPlayerAction(player, context);
-        ui.displayActionResult(player, action, context);
+        Combatant target = null;
+        if (action instanceof BasicAttack basicAttack) {
+            target = basicAttack.getTarget();
+        }
+        else if (action instanceof SpecialSkillAction skill) {
+            target = skill.getTarget();
+        }
+        else if (action instanceof UseItemAction useItem) {
+            Item item = useItem.getSelectedItem();
+
+            if (item instanceof Potion) {
+                target = player;
+            } else if (item instanceof PowerStone) {
+                target = context.getSelectedTarget();
+            }
+        }
+        else {
+            target = player;
+        }
+        int oldHp = target != null ? target.getHp() : 0;
         action.execute(player, context);
         player.decrementCooldown();
+        int newHp = target != null ? target.getHp() : 0;
+        ui.displayActionResult(player, action, context, target, oldHp, newHp);
     }
 
     private void executeEnemyTurn(Enemy enemy) {
         Action action = enemy.getActionStrategy().chooseAction(enemy, context);
-        ui.displayActionResult(enemy, action, context);
+        Combatant target = null;
+        if (action instanceof BasicAttack basicAttack) {
+            target = basicAttack.getTarget();
+        }
+        else if (action instanceof SpecialSkillAction skill) {
+            target = skill.getTarget();
+        }
+        else if (action instanceof UseItemAction useItem) {
+            Item item = useItem.getSelectedItem();
+
+            if (item instanceof Potion) {
+                target = enemy;
+            } else if (item instanceof PowerStone) {
+                target = context.getSelectedTarget();
+            }
+        }
+        else {
+            target = enemy;
+        }
+        int oldHp = target != null ? target.getHp() : 0;
         action.execute(enemy, context);
+        int newHp = target != null ? target.getHp() : 0;
+        ui.displayActionResult(enemy, action, context, target, oldHp, newHp);
     }
 }
