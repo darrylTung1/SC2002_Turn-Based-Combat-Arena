@@ -8,7 +8,6 @@ import combat.item.PowerStone;
 import combat.item.SmokeBomb;
 import combat.level.Difficulty;
 import combat.model.*;
-import combat.effect.StatusEffect; // added
 
 import java.util.ArrayList;
 import java.util.List;
@@ -135,16 +134,13 @@ public class CLIView implements GameUI {
         System.out.println("\n" + player.getName() + "'s turn! HP: " + player.getHp() + "/" + player.getMaxHp());
         System.out.println("1. Basic Attack");
         System.out.println("2. Defend");
+        System.out.println("3. Use Item");
 
-        int maxOption = 2;
-        if (player.hasItems()) {
-            System.out.println("3. Use Item");
-            maxOption = 3;
-        }
+        int maxOption = 3;
         if (player.isSpecialSkillReady()) {
             System.out.println("4. " + player.getSpecialSkillName()
                     + " (Special Skill)");
-            maxOption = Math.max(maxOption, 4);
+            maxOption = 4;
         } else {
             System.out.println("4. " + player.getSpecialSkillName()
                     + " (Cooldown: " + player.getSpecialSkillCooldown() + ")");
@@ -161,8 +157,11 @@ public class CLIView implements GameUI {
             }
             case 2 -> new DefendAction();
             case 3 -> {
+                Item item = selectItemWithBack(player.getItems());
+                if (item == null) {
+                    yield getPlayerAction(player, context);
+                }
                 UseItemAction useItem = new UseItemAction();
-                Item item = selectItem(player.getItems());
                 useItem.setSelectedItem(item);
                 // For Power Stone, need a target
                 if (item instanceof PowerStone) {
@@ -269,6 +268,26 @@ public class CLIView implements GameUI {
                 System.out.print("Invalid input. Enter a number: ");
             }
         }
+    }
+
+    private Item selectItemWithBack(List<Item> items) {
+        if (items.isEmpty()) {
+            System.out.println("No items available.");
+            System.out.println("  1. Back");
+            System.out.print("Choose: ");
+            readInt(1, 1);
+            return null;
+        }
+        System.out.println("Select item:");
+        for (int i = 0; i < items.size(); i++) {
+            System.out.println("  " + (i + 1) + ". " + items.get(i).getName()
+                    + " - " + items.get(i).getDescription());
+        }
+        System.out.println("  " + (items.size() + 1) + ". Back");
+        System.out.print("Item: ");
+        int choice = readInt(1, items.size() + 1);
+        if (choice == items.size() + 1) return null;
+        return items.get(choice - 1);
     }
 
     private Item createItem(int choice) {
