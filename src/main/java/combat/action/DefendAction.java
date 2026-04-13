@@ -8,7 +8,7 @@ import combat.model.Combatant;
 
 // Increases defense by 10 for current and next round [2 turns]
 
-public class DefendAction extends TargetAction {
+public class DefendAction implements Action {
 
     @Override
     public void execute(Combatant actor, BattleContext context) {

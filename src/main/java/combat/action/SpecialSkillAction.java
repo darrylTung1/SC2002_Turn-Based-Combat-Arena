@@ -6,18 +6,18 @@ import combat.model.Player;
 
 // Execute player's class-specific special ability [Cooldown: 3 turns incl. current round]
 
-public class SpecialSkillAction extends TargetAction {
-    // private Combatant target;
+public class SpecialSkillAction implements Action {
+    private Combatant target;
 
-    // public void setTarget(Combatant target) {
-    //     this.target = target;
-    // }
+    public void setTarget(Combatant target) {
+        this.target = target;
+    }
 
     @Override
     public void execute(Combatant actor, BattleContext context) {
         if (!(actor instanceof Player player)) return;
 
-        player.executeSpecialSkill(getTarget(), context.getAliveEnemies());
+        player.executeSpecialSkill(target, context.getAliveEnemies());
         player.setSpecialSkillCooldown(3); // 3 turns including current
     }
 
@@ -31,7 +31,7 @@ public class SpecialSkillAction extends TargetAction {
         return (actor instanceof Player player) && player.isSpecialSkillReady();
     }
 
-    // public Combatant getTarget() {
-    //     return target;
-    // }
+    public Combatant getTarget() {
+        return target;
+    }
 }
