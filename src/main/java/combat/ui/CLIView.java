@@ -32,7 +32,9 @@ public class CLIView implements GameUI {
         System.out.println("1. Warrior - HP:260 ATK:40 DEF:20 SPD:30 | Shield Bash");
         System.out.println("2. Wizard  - HP:200 ATK:50 DEF:10 SPD:20 | Arcane Blast");
         System.out.print("Choose (1-2): ");
-        return createPlayer(readInt(1, 2));
+        
+        int choice = readInt(1,2);
+        return choice == 1 ? warrior : wizard;
     }
 
     @Override
@@ -45,7 +47,7 @@ public class CLIView implements GameUI {
         List<Item> items = new ArrayList<>();
         for (int i = 1; i <= 2; i++) {
             System.out.print("Item " + i + " (1-3): ");
-            items.add(createItem(readInt(1, 3)));
+            items.add(createItem(choice));
         }
         return items;
     }
@@ -171,7 +173,7 @@ public class CLIView implements GameUI {
                 skill.setTarget(selectTarget(context.getAliveEnemies()));
                 yield skill;
             }
-            default -> getPlayerAction(player, context);
+            default -> {yield getPlayerAction(player, context);}
         };
     }
 
@@ -238,30 +240,7 @@ public class CLIView implements GameUI {
         };
     }
 
-    // FACTORY METHODS (protected for subclass override — OCP)
-
-    // Create a player by menu choice. Override to add new player classes
-    // without touching any other CLIView method.
-    protected Player createPlayer(int choice) {
-        return switch (choice) {
-            case 1 -> new Warrior();
-            case 2 -> new Wizard();
-            default -> new Warrior();
-        };
-    }
-
-
-    // Create an item by menu choice. Override to add new item types
-    // without touching any other CLIView method.
-    protected Item createItem(int choice) {
-        return switch (choice) {
-            case 1 -> new Potion();
-            case 2 -> new PowerStone();
-            case 3 -> new SmokeBomb();
-            default -> new Potion();
-        };
-    }
-
+    // =============================================
     // HELPERS
 
     private int readInt(int min, int max) {
