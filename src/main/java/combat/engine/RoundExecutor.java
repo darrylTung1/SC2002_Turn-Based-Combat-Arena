@@ -1,13 +1,7 @@
 package combat.engine;
 
 import combat.action.Action;
-import combat.action.BasicAttack;
-import combat.action.SpecialSkillAction;
-import combat.action.UseItemAction;
 import combat.effect.StunEffect;
-import combat.item.Item;
-import combat.item.Potion;
-import combat.item.PowerStone;
 import combat.model.Combatant;
 import combat.model.Enemy;
 import combat.model.Player;
@@ -16,6 +10,11 @@ import combat.ui.GameUI;
 
 import java.util.List;
 
+/**
+ * Executes one complete round of battle.
+ * SRP: Handles round-level flow only.
+ * OCP: Does not hard-code concrete Action or Item types.
+ */
 public class RoundExecutor {
     private final TurnOrderStrategy turnOrderStrategy;
     private final GameUI ui;
@@ -31,21 +30,20 @@ public class RoundExecutor {
         );
 
         for (Combatant combatant : turnOrder) {
-            if (!combatant.isAlive()) continue;
+            if (!combatant.isAlive()) {
+                continue;
+            }
 
             if (combatant.hasEffect(StunEffect.class)) {
                 ui.displayStunned(combatant);
+
                 if (combatant instanceof Player player) {
                     player.decrementCooldown();
                 }
                 continue;
             }
 
-            if (combatant instanceof Player player) {
-                executePlayerTurn(player, context);
-            } else if (combatant instanceof Enemy enemy) {
-                executeEnemyTurn(enemy, context);
-            }
+            executeTurn(combatant, context);
 
             if (context.isPlayerDefeated() || context.allEnemiesDefeated()) {
                 break;
@@ -53,59 +51,37 @@ public class RoundExecutor {
         }
 
         for (Combatant combatant : turnOrder) {
-            if (!combatant.isAlive()) continue;
-            combatant.tickEffects();
+            if (combatant.isAlive()) {
+                combatant.tickEffects();
+            }
         }
     }
 
-    private void executePlayerTurn(Player player, BattleContext context) {
-        Action action = ui.getPlayerAction(player, context);
-        Combatant target = null;
-
-        if (action instanceof BasicAttack basicAttack) {
-            target = basicAttack.getTarget();
-        } else if (action instanceof SpecialSkillAction skill) {
-            target = skill.getTarget();
-        } else if (action instanceof UseItemAction useItem) {
-            Item item = useItem.getSelectedItem();
-            if (item instanceof Potion) {
-                target = player;
-            } else if (item instanceof PowerStone) {
-                target = context.getSelectedTarget();
-            }
-        } else {
-            target = player;
-        }
+    private void executeTurn(Combatant combatant, BattleContext context) {
+        Action action = chooseAction(combatant, context);
+        Combatant target = action.resolveTarget(context);
 
         int oldHp = target != null ? target.getHp() : 0;
-        action.execute(player, context);
-        player.decrementCooldown();
+
+        action.execute(combatant, context);
+
+        if (combatant instanceof Player player) {
+            player.decrementCooldown();
+        }
+
         int newHp = target != null ? target.getHp() : 0;
-        ui.displayActionResult(player, action, context, target, oldHp, newHp);
+        ui.displayActionResult(combatant, action, context, target, oldHp, newHp);
     }
 
-    private void executeEnemyTurn(Enemy enemy, BattleContext context) {
-        Action action = enemy.getActionStrategy().chooseAction(enemy, context);
-        Combatant target = null;
-
-        if (action instanceof BasicAttack basicAttack) {
-            target = basicAttack.getTarget();
-        } else if (action instanceof SpecialSkillAction skill) {
-            target = skill.getTarget();
-        } else if (action instanceof UseItemAction useItem) {
-            Item item = useItem.getSelectedItem();
-            if (item instanceof Potion) {
-                target = enemy;
-            } else if (item instanceof PowerStone) {
-                target = context.getSelectedTarget();
-            }
-        } else {
-            target = enemy;
+    private Action chooseAction(Combatant combatant, BattleContext context) {
+        if (combatant instanceof Player player) {
+            return ui.getPlayerAction(player, context);
         }
 
-        int oldHp = target != null ? target.getHp() : 0;
-        action.execute(enemy, context);
-        int newHp = target != null ? target.getHp() : 0;
-        ui.displayActionResult(enemy, action, context, target, oldHp, newHp);
+        if (combatant instanceof Enemy enemy) {
+            return enemy.getActionStrategy().chooseAction(enemy, context);
+        }
+
+        throw new IllegalStateException("Unknown combatant type: " + combatant.getClass().getName());
     }
 }
