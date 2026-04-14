@@ -50,14 +50,20 @@ public class GameController {
 
                 BattleResult result = engine.startBattle(battlePlayer, level);
 
-                PostBattleChoice choice = ui.promptReplay();
-                switch (choice) {
-                    case REPLAY -> { /* same settings, restart battle */ }
-                    case NEW_GAME -> inCurrentSetup = false;
-                    case EXIT -> {
-                        running = false;
-                        inCurrentSetup = false;
+                if (result == BattleResult.DEFEAT) {
+                    PostBattleChoice choice = ui.promptReplay();
+                    switch (choice) {
+                        case REPLAY -> { /* same settings, restart battle */ }
+                        case NEW_GAME -> inCurrentSetup = false;
+                        case EXIT -> {
+                            running = false;
+                            inCurrentSetup = false;
+                        }
                     }
+                } else {
+                    // Victory — game ends immediately
+                    running = false;
+                    inCurrentSetup = false;
                 }
             }
         }

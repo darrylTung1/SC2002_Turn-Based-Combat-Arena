@@ -12,9 +12,7 @@ public class SmokeBomb implements Item {
 
     @Override
     public void use(Player user, BattleContext context) {
-        SmokeBombEffect effect = new SmokeBombEffect(2);
-        user.addStatusEffect(effect);
-        effect.onApply(user);
+        user.addStatusEffect(new SmokeBombEffect(2));
     }
 
     @Override

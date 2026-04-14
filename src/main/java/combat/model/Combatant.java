@@ -51,6 +51,7 @@ public abstract class Combatant {
 
     public void addStatusEffect(StatusEffect effect) {
         this.statusEffects.add(effect);
+        effect.onApply(this);
     }
 
     public void removeExpiredEffects() {

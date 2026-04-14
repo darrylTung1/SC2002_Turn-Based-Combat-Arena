@@ -22,9 +22,7 @@ public class Warrior extends Player {
         target.takeDamage(damage);
 
         if (target.isAlive()) {
-            StunEffect stun = new StunEffect(2);
-            target.addStatusEffect(stun);
-            stun.onApply(target);
+            target.addStatusEffect(new StunEffect(2));
         }
     }
 
