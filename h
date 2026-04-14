@@ -1,0 +1,462 @@
+[33mcommit a19f01cbf4acc8b15307106f629504a76650aca0[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mZK[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Merge: 5b4d3ff 0a0c976
+Author: ChinZhiKhang <161846482+ChinZhiKhang@users.noreply.github.com>
+Date:   Tue Apr 14 20:40:49 2026 +0800
+
+    Merge pull request #11 from darrylTung1/ZK
+    
+    Zk
+
+[33mcommit 0a0c976700fac6dee5046f11cd194e3f3b3175a4[m[33m ([m[1;31morigin/ZK[m[33m)[m
+Author: Zhi Khang <zhikhangchin@gmail.com>
+Date:   Tue Apr 14 20:22:05 2026 +0800
+
+    staging changes
+
+[33mcommit 3f578c58292440b37477e8ac3e0aa96815637446[m
+Merge: da64410 5b4d3ff
+Author: Zhi Khang <zhikhangchin@gmail.com>
+Date:   Tue Apr 14 20:19:18 2026 +0800
+
+    Merge branch 'main' of https://github.com/darrylTung1/SC2002_Turn-Based-Combat-Arena into ZK
+
+[33mcommit da644106e5e95049300b233a2b0fe2759dd4bdc1[m
+Author: Zhi Khang <zhikhangchin@gmail.com>
+Date:   Tue Apr 14 20:18:23 2026 +0800
+
+    Merge branch 'main' of https://github.com/darrylTung1/SC2002_Turn-Based-Combat-Arena into ZK
+
+[33mcommit 5b4d3ffc3eab76116ed5985045465bb7708ffa3f[m
+Author: Daijiaxin0018 <2942827022@qq.com>
+Date:   Tue Apr 14 20:17:51 2026 +0800
+
+    Add files via upload
+
+[33mcommit 18249cad158d19d55face7842f5d474b7ca06586[m
+Author: Daijiaxin0018 <2942827022@qq.com>
+Date:   Tue Apr 14 20:17:22 2026 +0800
+
+    Add files via upload
+
+[33mcommit 128f840aeefb9fcc069173c37b5878a98ad60872[m
+Author: Daijiaxin0018 <2942827022@qq.com>
+Date:   Tue Apr 14 20:16:26 2026 +0800
+
+    Add files via upload
+
+[33mcommit f2314f741c3f7075896282444e9acbbed4cd919d[m
+Merge: 2c13872 5591858
+Author: Zhi Khang <zhikhangchin@gmail.com>
+Date:   Tue Apr 14 20:06:41 2026 +0800
+
+    Merge branch 'main' of https://github.com/darrylTung1/SC2002_Turn-Based-Combat-Arena into ZK
+
+[33mcommit 2c13872848817940a161a1fe99ad9951c6b0f1b6[m
+Merge: ef94a38 c2ae5e3
+Author: Zhi Khang <zhikhangchin@gmail.com>
+Date:   Tue Apr 14 20:05:48 2026 +0800
+
+    Merge branch 'main' of https://github.com/darrylTung1/SC2002_Turn-Based-Combat-Arena into ZK
+
+[33mcommit 5591858e3a509ec9d92b6ae072a91a438fa3b389[m
+Author: Daijiaxin0018 <2942827022@qq.com>
+Date:   Tue Apr 14 20:05:00 2026 +0800
+
+    Add files via upload
+
+[33mcommit ef94a38ed8dbc73da5c7cab8faa68ae483a0cf73[m
+Merge: 49d00f6 3637ead
+Author: Zhi Khang <zhikhangchin@gmail.com>
+Date:   Tue Apr 14 20:01:50 2026 +0800
+
+    Merge branch 'main' of https://github.com/darrylTung1/SC2002_Turn-Based-Combat-Arena into ZK
+
+[33mcommit c2ae5e347e5297dff2c85f2b42dcd7499f730b9d[m
+Author: IrmuunCh <112145730+IrmuunCh@users.noreply.github.com>
+Date:   Tue Apr 14 19:57:53 2026 +0800
+
+    Add files via upload
+
+[33mcommit dbc2be4a68f64e0e9c8f60659a956fa46bf7602d[m
+Author: IrmuunCh <112145730+IrmuunCh@users.noreply.github.com>
+Date:   Tue Apr 14 19:57:16 2026 +0800
+
+    Delete StatusEffect.java
+
+[33mcommit 2f94c03949f851b11bb70b1bc030093fab5f2185[m
+Author: IrmuunCh <112145730+IrmuunCh@users.noreply.github.com>
+Date:   Tue Apr 14 19:57:07 2026 +0800
+
+    Delete SmokeBombEffect.java
+
+[33mcommit 4b640313754b2a688d890ebfc9121bcd85cc05a6[m
+Author: IrmuunCh <112145730+IrmuunCh@users.noreply.github.com>
+Date:   Tue Apr 14 19:56:58 2026 +0800
+
+    Delete DefendBuff.java
+
+[33mcommit ac00a5f4ef89f6cb33f36fb7a77e3ecf3932eae5[m
+Author: Daijiaxin0018 <2942827022@qq.com>
+Date:   Tue Apr 14 19:56:34 2026 +0800
+
+    Delete StunEffect.java
+
+[33mcommit c4adf79201f9d4ca8e730eaf08c45b52fd1dd71d[m
+Author: Daijiaxin0018 <2942827022@qq.com>
+Date:   Tue Apr 14 19:56:12 2026 +0800
+
+    Delete AttackBlockingEffect.java
+
+[33mcommit cf2679a00cb35a6a41ee3b3a51da9325c572e846[m
+Author: Daijiaxin0018 <2942827022@qq.com>
+Date:   Tue Apr 14 19:55:58 2026 +0800
+
+    Delete ArcaneBlastBuff.java
+
+[33mcommit 3637ead45d7ea518250948684d839dfa13781131[m
+Author: Daijiaxin0018 <2942827022@qq.com>
+Date:   Tue Apr 14 19:52:22 2026 +0800
+
+    Add files via upload
+
+[33mcommit 49d00f6a44c65707e8d0508ba87df089918a4da3[m
+Author: Zhi Khang <zhikhangchin@gmail.com>
+Date:   Tue Apr 14 19:51:51 2026 +0800
+
+    updated model files
+
+[33mcommit bd3b3e1f3de6f1929682b470d6fa9cd4e7d2d424[m
+Author: IrmuunCh <112145730+IrmuunCh@users.noreply.github.com>
+Date:   Tue Apr 14 19:51:02 2026 +0800
+
+    Add files via upload
+
+[33mcommit 6e0a010219bf57a14f12b17c19e76a20d98ca433[m
+Author: Daijiaxin0018 <2942827022@qq.com>
+Date:   Tue Apr 14 19:50:33 2026 +0800
+
+    Add files via upload
+
+[33mcommit de765534577daa57f20e3de1a3a0e4bdb0e3273f[m
+Merge: 091bd57 4aace6e
+Author: Daijiaxin0018 <2942827022@qq.com>
+Date:   Tue Apr 14 19:47:33 2026 +0800
+
+    Merge pull request #10 from darrylTung1/irmuun
+    
+    Irmuun
+
+[33mcommit 4aace6ed823172e9d39fa66ffdbf662987349dcb[m
+Author: IrmuunCh <112145730+IrmuunCh@users.noreply.github.com>
+Date:   Tue Apr 14 19:46:36 2026 +0800
+
+    Update SmokeBomb.java
+
+[33mcommit f082986d918b478e0f76683f2d710c46756e6957[m
+Author: IrmuunCh <112145730+IrmuunCh@users.noreply.github.com>
+Date:   Tue Apr 14 19:46:24 2026 +0800
+
+    Update PowerStone.java
+
+[33mcommit 87ba1119555e85a0217c10b3add13fde395774a1[m
+Author: IrmuunCh <112145730+IrmuunCh@users.noreply.github.com>
+Date:   Tue Apr 14 19:46:13 2026 +0800
+
+    Update Potion.java
+
+[33mcommit bf29b74edbe18a972426938f4a281ee54e020ed3[m
+Author: IrmuunCh <112145730+IrmuunCh@users.noreply.github.com>
+Date:   Tue Apr 14 19:46:03 2026 +0800
+
+    Update Item.java
+
+[33mcommit 0b21159d3530bc9214eaef35373d68bc2ea7309e[m
+Author: IrmuunCh <112145730+IrmuunCh@users.noreply.github.com>
+Date:   Tue Apr 14 19:45:19 2026 +0800
+
+    Create BattleUI.java
+
+[33mcommit 475f13cc52f908b756a22801baf7b1425f36ccf5[m
+Author: IrmuunCh <112145730+IrmuunCh@users.noreply.github.com>
+Date:   Tue Apr 14 19:44:04 2026 +0800
+
+    Update CLIView.java
+
+[33mcommit d10d255c8449a746a6784ba9d592c037212ec386[m
+Author: IrmuunCh <112145730+IrmuunCh@users.noreply.github.com>
+Date:   Tue Apr 14 19:43:42 2026 +0800
+
+    Update GameController.java
+
+[33mcommit af074333d119dc18c13729ecc6c9ea33858de4e4[m
+Author: IrmuunCh <112145730+IrmuunCh@users.noreply.github.com>
+Date:   Tue Apr 14 19:42:54 2026 +0800
+
+    Update GameUI.java
+
+[33mcommit 091bd576648cbd916fc823e33f9ef383795a8112[m
+Merge: a03e0d3 7b9f675
+Author: ChinZhiKhang <161846482+ChinZhiKhang@users.noreply.github.com>
+Date:   Tue Apr 14 19:32:04 2026 +0800
+
+    Merge pull request #9 from darrylTung1/ZK
+    
+    changed action and model files
+
+[33mcommit 7b9f675884cc4f7c9f4778f14b5a507e64396882[m
+Author: Zhi Khang <zhikhangchin@gmail.com>
+Date:   Tue Apr 14 19:31:21 2026 +0800
+
+    changed action and model files
+
+[33mcommit a03e0d39a567bd1276808da9cafab972dc23c0f5[m
+Merge: 1aeb429 e0998e0
+Author: Daijiaxin0018 <2942827022@qq.com>
+Date:   Tue Apr 14 19:29:06 2026 +0800
+
+    Merge pull request #8 from darrylTung1/Daijiaxin0018-patch-2
+    
+    Add files via upload
+
+[33mcommit e0998e0f09f4d2fa93f6ce25842d8897b7f6f5ed[m
+Author: Daijiaxin0018 <2942827022@qq.com>
+Date:   Tue Apr 14 19:28:33 2026 +0800
+
+    Add files via upload
+
+[33mcommit 1aeb42934e69d5efd3e635f4051fca9e196aabea[m
+Author: Daijiaxin0018 <2942827022@qq.com>
+Date:   Tue Apr 14 19:27:14 2026 +0800
+
+    Add files via upload
+
+[33mcommit fd67977d0d98f11d74da486b33ad3d95546e3e89[m
+Author: Daijiaxin0018 <2942827022@qq.com>
+Date:   Tue Apr 14 18:57:54 2026 +0800
+
+    Add files via upload
+
+[33mcommit 5efb8b73374276f2596cbc4acda690f5f52001e4[m
+Author: Daijiaxin0018 <2942827022@qq.com>
+Date:   Tue Apr 14 18:50:07 2026 +0800
+
+    Add files via upload
+
+[33mcommit d0d994b8cac9f91bd35e94f41bd70a5b64880152[m
+Merge: a7e9d52 16b80b2
+Author: Daijiaxin0018 <2942827022@qq.com>
+Date:   Tue Apr 14 18:28:40 2026 +0800
+
+    Merge pull request #7 from darrylTung1/Daijiaxin0018-patch-1
+    
+    Add files via upload
+
+[33mcommit 16b80b2099076094f9582be781022890feb6e101[m
+Author: Daijiaxin0018 <2942827022@qq.com>
+Date:   Tue Apr 14 18:26:14 2026 +0800
+
+    Add files via upload
+
+[33mcommit a7e9d52c3ca1597477de34fef923c230e9d4f73a[m
+Merge: 7b41ac0 6497455
+Author: ChinZhiKhang <161846482+ChinZhiKhang@users.noreply.github.com>
+Date:   Mon Apr 13 18:47:13 2026 +0800
+
+    Merge pull request #6 from darrylTung1/ZK
+    
+    reverted back to implementation of action interface for all action cl…
+
+[33mcommit 6497455cd0744e82bad0610548bc551be093e1be[m
+Author: Zhi Khang <zhikhangchin@gmail.com>
+Date:   Mon Apr 13 18:45:42 2026 +0800
+
+    reverted back to implementation of action interface for all action classes, deleted TargetAction class
+
+[33mcommit 7b41ac0a3e852db243475ff1681d229081749d39[m
+Merge: 337f3ae a7edbd7
+Author: IrmuunCh <112145730+IrmuunCh@users.noreply.github.com>
+Date:   Mon Apr 13 10:30:07 2026 +0800
+
+    Merge pull request #5 from darrylTung1/irmuun
+    
+    Update
+
+[33mcommit a7edbd7fc37cc5e744093bed3e79ce80fb78c869[m
+Author: IrmuunCh <112145730+IrmuunCh@users.noreply.github.com>
+Date:   Mon Apr 13 10:24:26 2026 +0800
+
+    Update CLIView.java
+
+[33mcommit c9c761668a8f7ff7fb707e5484792b1715c0ceba[m
+Author: IrmuunCh <112145730+IrmuunCh@users.noreply.github.com>
+Date:   Mon Apr 13 10:15:00 2026 +0800
+
+    Update GameUI.java
+
+[33mcommit 62237fadbd056dc5b2b465ca1919ce3cd3db72a4[m
+Author: IrmuunCh <112145730+IrmuunCh@users.noreply.github.com>
+Date:   Mon Apr 13 10:14:48 2026 +0800
+
+    Update CLIView.java
+
+[33mcommit 417b135672b29724060e70bef87b055513f6370c[m
+Author: IrmuunCh <112145730+IrmuunCh@users.noreply.github.com>
+Date:   Mon Apr 13 10:14:00 2026 +0800
+
+    Update BattleEngine.java
+
+[33mcommit 337f3aea33ef21d4a930ce313a194742583b4f0e[m
+Merge: e4048fe 3b89fa7
+Author: ChinZhiKhang <161846482+ChinZhiKhang@users.noreply.github.com>
+Date:   Sun Apr 12 17:27:44 2026 +0800
+
+    Merge pull request #4 from darrylTung1/ZK
+    
+    added TargetAction class, amended all other action classes to inherit…
+
+[33mcommit 3b89fa763b7ac3b0b8f718045a831033bb935174[m
+Author: Zhi Khang <zhikhangchin@gmail.com>
+Date:   Sun Apr 12 17:25:51 2026 +0800
+
+    added TargetAction class, amended all other action classes to inherit TargetAction
+
+[33mcommit e4048feebbca8a3ca1d91b2aead62bc512ccbeb7[m
+Merge: 7479b6c 406b570
+Author: ChinZhiKhang <161846482+ChinZhiKhang@users.noreply.github.com>
+Date:   Sun Apr 12 16:25:26 2026 +0800
+
+    Merge pull request #3 from darrylTung1/ZK
+    
+    Slight amendments to all action and model classes, no changes to meth…
+
+[33mcommit 406b570202646feec55d3c84016b8cbe95cbe31d[m
+Author: Zhi Khang <zhikhangchin@gmail.com>
+Date:   Sun Apr 12 16:23:32 2026 +0800
+
+    Slight amendments to all action and model classes, no changes to methods and attributes
+
+[33mcommit 7479b6ce66d1547adde5a74f87e3dfe7bbbe574e[m
+Author: IrmuunCh <112145730+IrmuunCh@users.noreply.github.com>
+Date:   Sat Apr 11 21:11:44 2026 +0800
+
+    Update CLIView.java
+
+[33mcommit 0fc1c45d11ebc2d79c323a643e6d544aababf030[m
+Merge: 0da24b9 5a95402
+Author: IrmuunCh <112145730+IrmuunCh@users.noreply.github.com>
+Date:   Sat Apr 11 21:10:40 2026 +0800
+
+    Merge pull request #2 from darrylTung1/IrmuunCh-patch-1
+    
+    Update BattleEngine.java
+
+[33mcommit 5a95402de68b0cb58d248f85c95edf8192c5ee12[m[33m ([m[1;31morigin/IrmuunCh-patch-1[m[33m)[m
+Author: IrmuunCh <112145730+IrmuunCh@users.noreply.github.com>
+Date:   Sat Apr 11 21:07:36 2026 +0800
+
+    Update BattleEngine.java
+    
+    Fixing smoke bomb, after used tick instantly become 1 and when player turn is before enemy's tick become 0 before enemy attack. Changed to tick after everyone takes turn
+
+[33mcommit 0da24b93e1f76b3c451f055474cd6e71950f75ce[m
+Author: darrylTung1 <darryltung2004@gmail.com>
+Date:   Sat Apr 11 21:06:15 2026 +0800
+
+    Make Use Item option always visible with back navigation
+
+[33mcommit 0b232db2ed7187182038c5f8894980f28f7123fd[m
+Merge: f2236fe 9a0af82
+Author: ChinZhiKhang <161846482+ChinZhiKhang@users.noreply.github.com>
+Date:   Sat Apr 11 20:31:34 2026 +0800
+
+    Merge pull request #1 from darrylTung1/IrmuunCh-patch-1
+    
+    Update CLIView.java
+
+[33mcommit f2236fe2bf39f80d6ea9539c1fd9ae84f412ce6b[m
+Author: darrylTung1 <darryltung2004@gmail.com>
+Date:   Sat Apr 11 20:17:13 2026 +0800
+
+    Remove updated uml_class_diagram files
+
+[33mcommit 9a0af829632a227794e023b8ef88f790acd6bb8b[m
+Author: IrmuunCh <112145730+IrmuunCh@users.noreply.github.com>
+Date:   Sat Apr 11 20:17:56 2026 +0800
+
+    Update BattleEngine.java
+    
+    First display and then execute, to get hp before attacking
+
+[33mcommit fe9e289d03beca5b104f5f936c149ad62a5b17da[m
+Author: IrmuunCh <112145730+IrmuunCh@users.noreply.github.com>
+Date:   Sat Apr 11 20:15:37 2026 +0800
+
+    Update CLIView.java
+    
+    Implemented displayActionResult, shows hp change
+
+[33mcommit f1dcb26550bf333c71e9cd087eebc93ecf891569[m
+Author: Daijiaxin0018 <2942827022@qq.com>
+Date:   Sat Apr 11 19:49:50 2026 +0800
+
+    Add files via upload
+
+[33mcommit d1a97d51737ed9b24c028497b333ce45b07d7f21[m
+Author: Daijiaxin0018 <2942827022@qq.com>
+Date:   Sat Apr 11 19:49:30 2026 +0800
+
+    Add files via upload
+
+[33mcommit 7586916ace30dbec9e7325e8505a8f3e1698163b[m
+Author: Daijiaxin0018 <2942827022@qq.com>
+Date:   Sat Apr 11 19:49:00 2026 +0800
+
+    Add files via upload
+
+[33mcommit 82dd9dbc1ccca4c1c6aec86dfa65313b1ed03673[m
+Author: Daijiaxin0018 <2942827022@qq.com>
+Date:   Sat Apr 11 19:47:22 2026 +0800
+
+    Add files via upload
+
+[33mcommit 11cdb110117d6115eca204071de8ca79847fd1f4[m
+Author: darrylTung1 <darryltung2004@gmail.com>
+Date:   Sat Apr 11 18:41:07 2026 +0800
+
+    Add Lucidchart link for UML class diagram
+
+[33mcommit b5800bd4349754c58d7adc321bfe549543d01d02[m
+Author: darrylTung1 <darryltung2004@gmail.com>
+Date:   Sat Apr 11 18:39:11 2026 +0800
+
+    Add updated UML class diagram
+
+[33mcommit 45dc68fd7c68bc6871b6b1f4df27598c8a8afffe[m[33m ([m[1;32mmain[m[33m)[m
+Author: darrylTung1 <darryltung2004@gmail.com>
+Date:   Fri Apr 3 20:14:13 2026 +0800
+
+    Update README: warn package structure doesn't match updated UML class diagram
+
+[33mcommit 936086df2a14630f3fee9b38150db0f68451f45a[m
+Author: darrylTung1 <darryltung2004@gmail.com>
+Date:   Fri Apr 3 20:10:58 2026 +0800
+
+    Remove old UML class diagrams
+
+[33mcommit f53c50cb66aa0953d5e65b58c71b3691788c8256[m
+Author: darrylTung1 <darryltung2004@gmail.com>
+Date:   Fri Apr 3 20:09:31 2026 +0800
+
+    Update UML class diagram
+
+[33mcommit e6a1e61b53ae7d472e56b4cf357fdca695ec1874[m
+Author: darrylTung1 <darryltung2004@gmail.com>
+Date:   Fri Apr 3 12:32:04 2026 +0800
+
+    Update README.md
+
+[33mcommit b1bd6b1ada5bd949b8b5eb02a98be6ccfa4d0847[m
+Author: darrylTung1 <darryltung2004@gmail.com>
+Date:   Fri Apr 3 12:30:31 2026 +0800
+
+    Initial commit
