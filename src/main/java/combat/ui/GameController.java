@@ -41,7 +41,7 @@ public class GameController {
 
             while (running && inCurrentSetup) {
             	Player battlePlayer = createFreshPlayer(selectedPlayer);
-            	selectedItems.forEach(battlePlayer::addItem);
+            	createFreshItems(selectedItems).forEach(battlePlayer::addItem);
                 Level level = new Level(difficulty, levelNumber);
                 BattleEngine engine = new BattleEngine(
                         new SpeedBasedTurnOrder(),
@@ -82,6 +82,21 @@ public class GameController {
         } catch (Exception e) {
             throw new IllegalStateException(
                     "Unable to recreate player of type: " + template.getClass().getSimpleName(), e
+            );
+        }
+    
+    }
+    private List<Item> createFreshItems(List<Item> templates) {
+        return templates.stream()
+                .map(this::createFreshItem)
+                .toList();
+    }
+    private Item createFreshItem(Item template) {
+        try {
+            return template.getClass().getDeclaredConstructor().newInstance();
+        } catch (Exception e) {
+            throw new IllegalStateException(
+                    "Unable to recreate item of type: " + template.getClass().getSimpleName(), e
             );
         }
     }
