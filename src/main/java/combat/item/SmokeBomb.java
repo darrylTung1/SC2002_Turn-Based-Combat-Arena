@@ -2,6 +2,7 @@ package combat.item;
 
 import combat.effect.SmokeBombEffect;
 import combat.engine.BattleContext;
+import combat.model.Combatant;
 import combat.model.Player;
 
 /**
@@ -11,7 +12,9 @@ public class SmokeBomb implements Item {
 
     @Override
     public void use(Player user, BattleContext context) {
-        user.addStatusEffect(new SmokeBombEffect(2));
+        SmokeBombEffect effect = new SmokeBombEffect(2);
+        user.addStatusEffect(effect);
+        effect.onApply(user);
     }
 
     @Override
@@ -22,5 +25,15 @@ public class SmokeBomb implements Item {
     @Override
     public String getDescription() {
         return "Enemy attacks deal 0 damage this turn and next turn";
+    }
+
+    @Override
+    public boolean requiresTarget() {
+        return false;
+    }
+
+    @Override
+    public Combatant resolveTarget(Player user, BattleContext context) {
+        return user;
     }
 }
