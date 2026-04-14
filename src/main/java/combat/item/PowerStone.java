@@ -11,6 +11,9 @@ public class PowerStone implements Item {
 
     @Override
     public void use(Player user, BattleContext context) {
+        // Save current cooldown (post-decrement), execute special skill, restore it.
+        // decrementCooldown() already ran this turn; saving and restoring the current value
+        // keeps the cooldown progressing normally without triggering a new 3-turn reset.
         int savedCooldown = user.getSpecialSkillCooldown();
         user.executeSpecialSkill(
                 context.getSelectedTarget(),
