@@ -8,10 +8,10 @@ import combat.item.PowerStone;
 import combat.item.SmokeBomb;
 import combat.level.Difficulty;
 import combat.model.*;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-
 
 /**
  * Command-line implementation of GameUI.
@@ -24,7 +24,9 @@ public class CLIView implements GameUI {
         this.scanner = new Scanner(System.in);
     }
 
+    // =============================================
     // SETUP SCREENS
+    // =============================================
 
     @Override
     public Player selectPlayer() {
@@ -32,7 +34,9 @@ public class CLIView implements GameUI {
         System.out.println("1. Warrior - HP:260 ATK:40 DEF:20 SPD:30 | Shield Bash");
         System.out.println("2. Wizard  - HP:200 ATK:50 DEF:10 SPD:20 | Arcane Blast");
         System.out.print("Choose (1-2): ");
-        return createPlayer(readInt(1, 2));
+
+        int choice = readInt(1, 2);
+        return choice == 1 ? new Warrior() : new Wizard();
     }
 
     @Override
@@ -45,17 +49,14 @@ public class CLIView implements GameUI {
         List<Item> items = new ArrayList<>();
         for (int i = 1; i <= 2; i++) {
             System.out.print("Item " + i + " (1-3): ");
-            items.add(createItem(readInt(1, 3)));
+            int choice = readInt(1, 3);
+            items.add(createItem(choice));
         }
         return items;
     }
 
     @Override
     public Difficulty selectDifficulty() {
-        System.out.println("\n=== ENEMIES ===");
-        System.out.println(new Goblin());
-        System.out.println(new Wolf());
-
         System.out.println("\n=== SELECT DIFFICULTY ===");
         System.out.println("1. Easy   - 3 Goblins");
         System.out.println("2. Medium - 1 Goblin + 1 Wolf | Backup: 2 Wolves");
@@ -71,7 +72,9 @@ public class CLIView implements GameUI {
         };
     }
 
+    // =============================================
     // BATTLE DISPLAY
+    // =============================================
 
     @Override
     public void displayBattleStart(Player player, List<Enemy> enemies) {
@@ -122,7 +125,9 @@ public class CLIView implements GameUI {
         }
     }
 
+    // =============================================
     // PLAYER INPUT
+    // =============================================
 
     @Override
     public Action getPlayerAction(Player player, BattleContext context) {
@@ -133,11 +138,12 @@ public class CLIView implements GameUI {
 
         int maxOption = 3;
         if (player.isSpecialSkillReady()) {
-            System.out.println("4. " + player.getSpecialSkillName() + " (Special Skill)");
+            System.out.println("4. " + player.getSpecialSkillName()
+                    + " (Special Skill)");
             maxOption = 4;
         } else {
             System.out.println("4. " + player.getSpecialSkillName()
-            + " (Cooldown: " + player.getSpecialSkillCooldown() + ")");
+                    + " (Cooldown: " + player.getSpecialSkillCooldown() + ")");
         }
 
         System.out.print("Choose action: ");
@@ -157,7 +163,8 @@ public class CLIView implements GameUI {
                 }
                 UseItemAction useItem = new UseItemAction();
                 useItem.setSelectedItem(item);
-                if (item.requiresTarget()) {
+                // For Power Stone, need a target
+                if (item instanceof PowerStone) {
                     context.setSelectedTarget(selectTarget(context.getAliveEnemies()));
                 }
                 yield useItem;
@@ -171,7 +178,9 @@ public class CLIView implements GameUI {
                 skill.setTarget(selectTarget(context.getAliveEnemies()));
                 yield skill;
             }
-            default -> getPlayerAction(player, context);
+            default -> {
+                yield getPlayerAction(player, context);
+            }
         };
     }
 
@@ -198,7 +207,9 @@ public class CLIView implements GameUI {
         return items.get(choice - 1);
     }
 
+    // =============================================
     // END SCREENS
+    // =============================================
 
     @Override
     public void displayVictory(BattleContext context) {
@@ -238,31 +249,14 @@ public class CLIView implements GameUI {
         };
     }
 
-    // FACTORY METHODS (protected for subclass override — OCP)
-
-    // Create a player by menu choice. Override to add new player classes
-    // without touching any other CLIView method.
-    protected Player createPlayer(int choice) {
-        return switch (choice) {
-            case 1 -> new Warrior();
-            case 2 -> new Wizard();
-            default -> new Warrior();
-        };
+    @Override
+    public boolean promptNewGame() {
+        return true; // Handled in promptReplay
     }
 
-
-    // Create an item by menu choice. Override to add new item types
-    // without touching any other CLIView method.
-    protected Item createItem(int choice) {
-        return switch (choice) {
-            case 1 -> new Potion();
-            case 2 -> new PowerStone();
-            case 3 -> new SmokeBomb();
-            default -> new Potion();
-        };
-    }
-
+    // =============================================
     // HELPERS
+    // =============================================
 
     private int readInt(int min, int max) {
         while (true) {
@@ -294,5 +288,14 @@ public class CLIView implements GameUI {
         int choice = readInt(1, items.size() + 1);
         if (choice == items.size() + 1) return null;
         return items.get(choice - 1);
+    }
+
+    private Item createItem(int choice) {
+        return switch (choice) {
+            case 1 -> new Potion();
+            case 2 -> new PowerStone();
+            case 3 -> new SmokeBomb();
+            default -> new Potion();
+        };
     }
 }

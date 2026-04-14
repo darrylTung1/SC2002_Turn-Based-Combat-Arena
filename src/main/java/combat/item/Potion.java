@@ -1,7 +1,6 @@
 package combat.item;
 
 import combat.engine.BattleContext;
-import combat.model.Combatant;
 import combat.model.Player;
 
 /**
