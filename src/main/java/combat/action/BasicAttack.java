@@ -1,6 +1,5 @@
 package combat.action;
 
-import combat.effect.AttackBlockingEffect;
 import combat.engine.BattleContext;
 import combat.model.Combatant;
 
@@ -21,10 +20,8 @@ public class BasicAttack implements Action {
     public void execute(Combatant actor, BattleContext context) {
         if (target == null || !target.isAlive()) return;
 
-        if (target.hasEffect(AttackBlockingEffect.class)) return;
-
         int damage = Math.max(0, actor.getAttack() - target.getDefense());
-        target.takeDamage(damage);
+        target.takeDamage(target.applyDamageModifiers(damage));
     }
 
     @Override

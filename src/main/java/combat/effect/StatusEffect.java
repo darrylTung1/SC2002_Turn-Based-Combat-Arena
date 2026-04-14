@@ -2,20 +2,42 @@ package combat.effect;
 
 import combat.model.Combatant;
 
-// Interface for all status effects applied to combatants.
-// OCP: new effects can be added without modifying existing code.
-public interface StatusEffect {
+/**
+ * Abstract base class for all status effects applied to combatants.
+ * OCP: new effects can be added without modifying existing code.
+ * Holds remainingDuration and provides shared tick/expiry logic.
+ * Subclasses implement onApply(), onExpire(), and getName().
+ */
+public abstract class StatusEffect {
+    protected int remainingDuration;
 
-    // Called at the end of each turn to tick down duration.
-    void tick(Combatant target);
+    protected StatusEffect(int duration) {
+        this.remainingDuration = duration;
+    }
 
-    void onApply(Combatant target);
+    public void tick(Combatant target) {
+        remainingDuration--;
+    }
 
-    void onExpire(Combatant target);
+    public abstract void onApply(Combatant target);
 
-    boolean isExpired();
+    public abstract void onExpire(Combatant target);
 
-    int getRemainingDuration();
+    public boolean isExpired() {
+        return remainingDuration <= 0;
+    }
 
-    String getName();
+    public int getRemainingDuration() {
+        return remainingDuration;
+    }
+
+    public abstract String getName();
+
+    /**
+     * Modify incoming damage to the combatant carrying this effect.
+     * Default is pass-through — override to intercept damage (e.g. SmokeBombEffect returns 0).
+     */
+    public int modifyIncomingDamage(int damage) {
+        return damage;
+    }
 }

@@ -39,8 +39,4 @@ public class PowerStone implements Item {
     public Combatant resolveTarget(Player user, BattleContext context) {
         return context.getSelectedTarget();
     }
-    @Override
-    public Item createFresh() {
-        return new PowerStone();
-    }
 }

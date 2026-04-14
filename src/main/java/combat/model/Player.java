@@ -66,6 +66,5 @@ public abstract class Player extends Combatant {
      * Create a fresh instance of this player class with base stats and no items.
      * LSP fix: GameController no longer needs instanceof to clone the player type.
      */
-    
     public abstract Player createFresh();
 }

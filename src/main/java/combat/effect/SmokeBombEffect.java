@@ -3,21 +3,19 @@ package combat.effect;
 import combat.model.Combatant;
 
 /**
- * Smoke Bomb effect — enemy attacks deal 0 damage.
+ * Smoke Bomb effect — incoming attacks deal 0 damage.
  * Duration: current turn + next turn (2 turns).
- * The blocking logic lives in BattleContext.isActorBlocked(), which BasicAttack queries.
+ * Overrides modifyIncomingDamage() to block all damage.
  */
-// Implements AttackBlockingEffect so BasicAttack knows to deal 0 damage to this combatant.
-public class SmokeBombEffect implements AttackBlockingEffect {
-    private int remainingDuration;
+public class SmokeBombEffect extends StatusEffect {
 
     public SmokeBombEffect(int duration) {
-        this.remainingDuration = duration;
+        super(duration);
     }
 
     @Override
-    public void tick(Combatant target) {
-        remainingDuration--;
+    public int modifyIncomingDamage(int damage) {
+        return 0;
     }
 
     @Override
@@ -28,16 +26,6 @@ public class SmokeBombEffect implements AttackBlockingEffect {
     @Override
     public void onExpire(Combatant target) {
         // No cleanup needed
-    }
-
-    @Override
-    public boolean isExpired() {
-        return remainingDuration <= 0;
-    }
-
-    @Override
-    public int getRemainingDuration() {
-        return remainingDuration;
     }
 
     @Override

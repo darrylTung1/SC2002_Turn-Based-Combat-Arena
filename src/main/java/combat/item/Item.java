@@ -32,6 +32,4 @@ public interface Item {
 
     // Resolve which combatant this item will affect, for display purposes
     Combatant resolveTarget(Player user, BattleContext context);
-    
-    Item createFresh();
 }

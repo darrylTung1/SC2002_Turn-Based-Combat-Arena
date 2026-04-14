@@ -1,47 +1,45 @@
 package combat.engine;
+
+import combat.action.Action;
+import combat.effect.StunEffect;
+import combat.level.Level;
+import combat.model.Combatant;
 import combat.model.Enemy;
 import combat.model.Player;
 import combat.strategy.TurnOrderStrategy;
-import combat.ui.GameUI;
-import combat.level.Level;
-
+import combat.ui.BattleUI;
 import java.util.List;
 
 /**
  * Core battle management engine.
- * DIP: Depends on abstractions (TurnOrderStrategy, Action, GameUI) — not concrete classes.
- * SRP: Manages battle flow only. Does not handle UI or entity creation.
+ * DIP: Depends on abstractions (TurnOrderStrategy, Action, BattleUI) — not concrete classes.
+ * SRP: Manages battle flow only — no UI creation, no entity creation.
+ * OCP fix: instanceof chains on Action/Item types removed; target resolution is now delegated to Action.resolveTarget().
  */
 public class BattleEngine {
-	private final RoundExecutor roundExecutor;
-	private final GameUI ui;
-	private BattleContext context;
-	private boolean backupSpawned;
-    public BattleEngine(TurnOrderStrategy turnOrderStrategy, GameUI ui) {
-        this.roundExecutor = new RoundExecutor(turnOrderStrategy, ui);
+    private final TurnOrderStrategy turnOrderStrategy;
+    private final BattleUI ui;
+    private BattleContext context;
+    private boolean backupSpawned;
+
+    public BattleEngine(TurnOrderStrategy turnOrderStrategy, BattleUI ui) {
+        this.turnOrderStrategy = turnOrderStrategy;
         this.ui = ui;
         this.backupSpawned = false;
     }
 
-    /**
-     * Run the entire battle for a given level.
-     * @param player the player combatant
-     * @param level  the level configuration
-     */
-    public BattleResult startBattle(Player player, Level level){
-        // Initialize context with initial spawn
+    public BattleResult startBattle(Player player, Level level) {
         context = new BattleContext(player, level.getInitialSpawn());
         backupSpawned = false;
 
         ui.displayBattleStart(player, context.getAllEnemies());
 
-        // Main game loop
         while (!context.allEnemiesDefeated() && !context.isPlayerDefeated()) {
             context.incrementRound();
             ui.displayRoundStart(context.getCurrentRound());
 
-            roundExecutor.execute(context);
-            // Check for backup spawn
+            executeRound();
+
             if (!backupSpawned && context.allEnemiesDefeated() && level.hasBackupSpawn()) {
                 List<Enemy> backup = level.getBackupSpawn();
                 context.addEnemies(backup);
@@ -52,7 +50,6 @@ public class BattleEngine {
             ui.displayRoundEnd(context);
         }
 
-        // Display result
         if (context.isPlayerDefeated()) {
             ui.displayDefeat(context);
             return BattleResult.DEFEAT;
@@ -60,5 +57,59 @@ public class BattleEngine {
             ui.displayVictory(context);
             return BattleResult.VICTORY;
         }
+    }
+
+    private void executeRound() {
+        List<Combatant> turnOrder = turnOrderStrategy.determineTurnOrder(
+                context.getAliveCombatants()
+        );
+
+        for (Combatant combatant : turnOrder) {
+            if (!combatant.isAlive()) continue;
+
+            if (combatant.hasEffect(StunEffect.class)) {
+                ui.displayStunned(combatant);
+                if (combatant instanceof Player player) player.decrementCooldown();
+                continue;
+            }
+
+            executeTurn(combatant);
+
+            if (context.isPlayerDefeated() || context.allEnemiesDefeated()) break;
+        }
+
+        for (Combatant combatant : turnOrder) {
+            if (combatant.isAlive()) combatant.tickEffects();
+        }
+    }
+
+    /**
+     * Execute a single combatant's turn.
+     * OCP fix: uses Action.resolveTarget() so no instanceof chains are needed when new Action types are added.
+     */
+    private void executeTurn(Combatant combatant) {
+        Action action = chooseAction(combatant);
+        Combatant target = action.resolveTarget(context);
+        int oldHp = target != null ? target.getHp() : 0;
+
+        action.execute(combatant, context);
+
+        if (combatant instanceof Player player) player.decrementCooldown();
+
+        int newHp = target != null ? target.getHp() : 0;
+        ui.displayActionResult(combatant, action, context, target, oldHp, newHp);
+    }
+
+    /**
+     * Choose the action for the given combatant.
+     * DIP note: the instanceof dispatch here is unavoidable without adding UI coupling to Combatant. It is isolated to this single method to minimise impact.
+     */
+    private Action chooseAction(Combatant combatant) {
+        if (combatant instanceof Player player) {
+            return ui.getPlayerAction(player, context);
+        } else if (combatant instanceof Enemy enemy) {
+            return enemy.getActionStrategy().chooseAction(enemy, context);
+        }
+        throw new IllegalStateException("Unknown combatant type: " + combatant.getClass());
     }
 }
