@@ -19,5 +19,4 @@ public interface GameUI extends BattleUI {
 
     // Post-Battle
     PostBattleChoice promptReplay();
-    boolean promptNewGame();
 }

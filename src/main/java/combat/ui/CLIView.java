@@ -164,7 +164,7 @@ public class CLIView implements GameUI {
                 UseItemAction useItem = new UseItemAction();
                 useItem.setSelectedItem(item);
                 // For Power Stone, need a target
-                if (item instanceof PowerStone) {
+                if (item.requiresTarget()) {
                     context.setSelectedTarget(selectTarget(context.getAliveEnemies()));
                 }
                 yield useItem;
@@ -247,11 +247,6 @@ public class CLIView implements GameUI {
             case 3 -> PostBattleChoice.EXIT;
             default -> PostBattleChoice.EXIT;
         };
-    }
-
-    @Override
-    public boolean promptNewGame() {
-        return true; // Handled in promptReplay
     }
 
     // =============================================
