@@ -15,10 +15,12 @@ public class SpecialSkillAction implements Action {
 
     @Override
     public void execute(Combatant actor, BattleContext context) {
-        if (!(actor instanceof Player player)) return;
+        // LSP: fail explicitly rather than silently doing nothing for non-Player actors.
+        if (!(actor instanceof Player player))
+            throw new IllegalStateException("SpecialSkillAction requires a Player actor");
 
         player.executeSpecialSkill(target, context.getAliveEnemies());
-        player.setSpecialSkillCooldown(3); // 3 turns including current
+        player.setSpecialSkillCooldown(3);
     }
 
     @Override
@@ -29,6 +31,11 @@ public class SpecialSkillAction implements Action {
     @Override
     public boolean isAvailable(Combatant actor, BattleContext context) {
         return (actor instanceof Player player) && player.isSpecialSkillReady();
+    }
+
+    @Override
+    public Combatant resolveTarget(BattleContext context) {
+        return target;
     }
 
     public Combatant getTarget() {
