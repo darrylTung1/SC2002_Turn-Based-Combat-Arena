@@ -3,9 +3,9 @@ package combat.model;
 import combat.effect.ArcaneBlastBuff;
 import java.util.List;
 
-// Wizard player class
-// Special Skill: Arcane Blast — deals BasicAttack damage to ALL enemies
-// Each kill adds +10 ATK lasting until end of level (tracked via ArcaneBlastBuff)
+// Wizard player class.
+ // Special Skill: Arcane Blast — deals BasicAttack damage to ALL enemies.
+ // Each kill adds +10 ATK lasting until end of level (tracked via ArcaneBlastBuff).
 
 public class Wizard extends Player {
     private static final int MAX_HP = 200;
@@ -29,6 +29,7 @@ public class Wizard extends Player {
                 }
             }
         }
+        // +10 ATK per kill, tracked via ArcaneBlastBuff status effect
         if (killCount > 0) {
             int bonus = killCount * 10;
             ArcaneBlastBuff existing = getEffect(ArcaneBlastBuff.class);
@@ -46,7 +47,6 @@ public class Wizard extends Player {
     public String getSpecialSkillName() {
         return "Arcane Blast";
     }
-
     @Override
     public Player createFresh() {
         return new Wizard();

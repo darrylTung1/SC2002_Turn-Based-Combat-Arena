@@ -6,38 +6,28 @@ import combat.item.Item;
 import combat.level.Difficulty;
 import combat.level.Level;
 import combat.model.Player;
-<<<<<<< HEAD
-import combat.strategy.SpeedBasedTurnOrder;
-=======
 import combat.strategy.TurnOrderStrategy;
->>>>>>> 5b4d3ffc3eab76116ed5985045465bb7708ffa3f
 
 import java.util.List;
 
 /**
  * Controller that orchestrates the game lifecycle.
-<<<<<<< HEAD
- * Connects UI ↔ Engine. Handles replay/new-game loop.
-=======
  * Connects UI <-> Engine. Handles replay/new-game loop.
->>>>>>> 5b4d3ffc3eab76116ed5985045465bb7708ffa3f
  * SRP: Only game flow orchestration.
  */
 public class GameController {
     private final GameUI ui;
+    private final TurnOrderStrategy turnOrderStrategy;
 
-    public GameController(GameUI ui) {
+    public GameController(GameUI ui, TurnOrderStrategy turnOrderStrategy) {
         this.ui = ui;
+        this.turnOrderStrategy = turnOrderStrategy;
     }
 
     public void run() {
         boolean running = true;
 
         while (running) {
-            // Setup phase
-        	Player selectedPlayer = ui.selectPlayer();
-        	List<Item> selectedItems = ui.selectItems();
-        	Difficulty difficulty = ui.selectDifficulty();
             Player originalPlayer = ui.selectPlayer();
             List<Item> originalItems = ui.selectItems();
             Difficulty difficulty = ui.selectDifficulty();
@@ -51,16 +41,11 @@ public class GameController {
             boolean inCurrentSetup = true;
 
             while (running && inCurrentSetup) {
-            	Player battlePlayer = createFreshPlayer(selectedPlayer);
-            	createFreshItems(selectedItems).forEach(battlePlayer::addItem);
                 Player battlePlayer = originalPlayer.createFresh();
                 createFreshItems(originalItems).forEach(battlePlayer::addItem);
 
                 Level level = new Level(difficulty, levelNumber);
-                BattleEngine engine = new BattleEngine(
-                        new SpeedBasedTurnOrder(),
-                        ui
-                );
+                BattleEngine engine = new BattleEngine(turnOrderStrategy, ui);
 
                 BattleResult result = engine.startBattle(battlePlayer, level);
 
@@ -69,7 +54,6 @@ public class GameController {
 
                     switch (choice) {
                         case REPLAY -> {
-                            // same settings, battle restarts
                             // Replay with same settings
                         }
                         case NEW_GAME -> inCurrentSetup = false;
@@ -79,7 +63,6 @@ public class GameController {
                         }
                     }
                 } else {
-                    // Win -> exit directly
                     running = false;
                     inCurrentSetup = false;
                 }
@@ -88,34 +71,6 @@ public class GameController {
 
         System.out.println("Thanks for playing!");
     }
-    
-    
-    /* Recreate a fresh player instance of the same class for replay.*/
-    private Player createFreshPlayer(Player template) {
-        try {
-            return template.getClass().getDeclaredConstructor().newInstance();
-        } catch (Exception e) {
-            throw new IllegalStateException(
-                    "Unable to recreate player of type: " + template.getClass().getSimpleName(), e
-            );
-        }
-    
-    }
-    private List<Item> createFreshItems(List<Item> templates) {
-        return templates.stream()
-                .map(this::createFreshItem)
-                .toList();
-    }
-    private Item createFreshItem(Item template) {
-        try {
-            return template.getClass().getDeclaredConstructor().newInstance();
-        } catch (Exception e) {
-            throw new IllegalStateException(
-                    "Unable to recreate item of type: " + template.getClass().getSimpleName(), e
-            );
-        }
-    }
-}
 
     private List<Item> createFreshItems(List<Item> templates) {
         return templates.stream()
