@@ -53,6 +53,7 @@ public abstract class Combatant {
     // Status Effect Management
     public void addStatusEffect(StatusEffect effect) {
         this.statusEffects.add(effect);
+        effect.onApply(this);
     }
 
     public void removeExpiredEffects() {

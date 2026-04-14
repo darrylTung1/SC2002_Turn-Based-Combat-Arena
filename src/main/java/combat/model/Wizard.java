@@ -36,9 +36,7 @@ public class Wizard extends Player {
             if (existing != null) {
                 existing.addBonus(bonus, this);
             } else {
-                ArcaneBlastBuff buff = new ArcaneBlastBuff(bonus);
-                addStatusEffect(buff);
-                buff.onApply(this);
+                addStatusEffect(new ArcaneBlastBuff(bonus));
             }
         }
     }

@@ -59,6 +59,10 @@ public class GameController {
                             inCurrentSetup = false;
                         }
                     }
+                } else {
+                    // Victory — game ends immediately
+                    running = false;
+                    inCurrentSetup = false;
                 }
             }
         }

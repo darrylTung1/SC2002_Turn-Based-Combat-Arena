@@ -10,9 +10,7 @@ public class DefendAction implements Action {
 
     @Override
     public void execute(Combatant actor, BattleContext context) {
-        DefendBuff buff = new DefendBuff(2);
-        actor.addStatusEffect(buff);
-        buff.onApply(actor); // Delegate stat modification to the buff — keeps logic self-contained
+        actor.addStatusEffect(new DefendBuff(2));
     }
 
     @Override
