@@ -2,6 +2,7 @@ package combat.item;
 
 import combat.effect.SmokeBombEffect;
 import combat.engine.BattleContext;
+import combat.model.Combatant;
 import combat.model.Player;
 
 /**
