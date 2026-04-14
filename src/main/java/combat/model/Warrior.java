@@ -32,4 +32,8 @@ public class Warrior extends Player {
     public String getSpecialSkillName() {
         return "Shield Bash";
     }
+    @Override
+    public Player createFresh() {
+        return new Warrior();
+    }
 }

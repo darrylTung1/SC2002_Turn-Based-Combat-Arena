@@ -59,4 +59,6 @@ public abstract class Player extends Combatant {
 
     // Returns the name of the special skill
     public abstract String getSpecialSkillName();
+    
+    public abstract Player createFresh();
 }

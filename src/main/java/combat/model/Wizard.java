@@ -47,4 +47,8 @@ public class Wizard extends Player {
     public String getSpecialSkillName() {
         return "Arcane Blast";
     }
+    @Override
+    public Player createFresh() {
+        return new Wizard();
+    }
 }
