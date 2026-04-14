@@ -7,19 +7,11 @@ import combat.level.Difficulty;
 import combat.level.Level;
 import combat.model.Player;
 import combat.strategy.TurnOrderStrategy;
-<<<<<<< HEAD
-
-=======
->>>>>>> e96d39b (refactor status effect hierarchy and damage handling)
 import java.util.List;
 
 /**
  * Controller that orchestrates the game lifecycle.
-<<<<<<< HEAD
  * Connects UI <-> Engine. Handles replay/new-game loop.
-=======
- * Connects UI  <-> Engine. Handles replay/new-game loop.
->>>>>>> e96d39b (refactor status effect hierarchy and damage handling)
  * SRP: Only game flow orchestration.
  * LSP: uses Player.createFresh() instead of instanceof Warrior/Wizard to clone the player.
  */
@@ -49,10 +41,6 @@ public class GameController {
             boolean inCurrentSetup = true;
 
             while (running && inCurrentSetup) {
-<<<<<<< HEAD
-=======
-                // LSP fix: no instanceof — every Player subclass knows how to clone itself.
->>>>>>> e96d39b (refactor status effect hierarchy and damage handling)
                 Player battlePlayer = originalPlayer.createFresh();
                 items.forEach(battlePlayer::addItem);
 
@@ -64,36 +52,17 @@ public class GameController {
                 if (result == BattleResult.DEFEAT) {
                     PostBattleChoice choice = ui.promptReplay();
                     switch (choice) {
-<<<<<<< HEAD
-                        case REPLAY -> {
-                            // Replay with same settings
-                        }
-=======
                         case REPLAY -> { /* same settings, restart battle */ }
->>>>>>> e96d39b (refactor status effect hierarchy and damage handling)
                         case NEW_GAME -> inCurrentSetup = false;
                         case EXIT -> {
                             running = false;
                             inCurrentSetup = false;
                         }
                     }
-                } else {
-                    running = false;
-                    inCurrentSetup = false;
                 }
             }
         }
 
         System.out.println("Thanks for playing!");
     }
-<<<<<<< HEAD
-
-    private List<Item> createFreshItems(List<Item> templates) {
-        return templates.stream()
-                .map(Item::createFresh)
-                .toList();
-    }
 }
-=======
-}
->>>>>>> e96d39b (refactor status effect hierarchy and damage handling)
