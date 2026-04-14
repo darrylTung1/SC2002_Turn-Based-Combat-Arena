@@ -23,4 +23,21 @@ public class SmokeBomb implements Item {
     public String getDescription() {
         return "Enemy attacks deal 0 damage this turn and next turn";
     }
+<<<<<<< HEAD
+=======
+
+    @Override
+    public boolean requiresTarget() {
+        return false;
+    }
+
+    @Override
+    public Combatant resolveTarget(Player user, BattleContext context) {
+        return user;
+    }
+    @Override
+    public Item createFresh() {
+        return new SmokeBomb();
+    }
+>>>>>>> 5b4d3ffc3eab76116ed5985045465bb7708ffa3f
 }

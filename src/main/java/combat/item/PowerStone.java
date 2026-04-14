@@ -29,4 +29,21 @@ public class PowerStone implements Item {
     public String getDescription() {
         return "Triggers special skill without affecting cooldown";
     }
+<<<<<<< HEAD
+=======
+
+    @Override
+    public boolean requiresTarget() {
+        return true;
+    }
+
+    @Override
+    public Combatant resolveTarget(Player user, BattleContext context) {
+        return context.getSelectedTarget();
+    }
+    @Override
+    public Item createFresh() {
+        return new PowerStone();
+    }
+>>>>>>> 5b4d3ffc3eab76116ed5985045465bb7708ffa3f
 }
