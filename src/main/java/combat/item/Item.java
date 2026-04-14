@@ -1,6 +1,7 @@
 package combat.item;
 
 import combat.engine.BattleContext;
+import combat.model.Combatant;
 import combat.model.Player;
 
 /**
@@ -10,20 +11,16 @@ import combat.model.Player;
  */
 public interface Item {
 
-    /**
-     * Use this item. Item is consumed after use.
-     * @param user    the player using the item
-     * @param context the current battle state
-     */
+    // Use this item. Item is consumed after use
     void use(Player user, BattleContext context);
 
-    /**
-     * @return display name of this item
-     */
     String getName();
 
-    /**
-     * @return description of what this item does
-     */
     String getDescription();
+
+    // Whether this item requires the player to select a target before use
+    boolean requiresTarget();
+
+    // Resolve which combatant this item will affect, for display purposes
+    Combatant resolveTarget(Player user, BattleContext context);
 }
