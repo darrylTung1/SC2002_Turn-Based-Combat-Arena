@@ -21,7 +21,7 @@ public class DefendBuff implements StatusEffect {
 
     @Override
     public void onApply(Combatant target) {
-        // Defense already modified by DefendAction
+        target.modifyDefense(DEFENSE_BONUS);
     }
 
     @Override

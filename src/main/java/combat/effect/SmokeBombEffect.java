@@ -5,8 +5,10 @@ import combat.model.Combatant;
 /**
  * Smoke Bomb effect — enemy attacks deal 0 damage.
  * Duration: current turn + next turn (2 turns).
+ * The blocking logic lives in BattleContext.isActorBlocked(), which BasicAttack queries.
  */
-public class SmokeBombEffect implements StatusEffect {
+// Implements AttackBlockingEffect so BasicAttack knows to deal 0 damage to this combatant.
+public class SmokeBombEffect implements AttackBlockingEffect {
     private int remainingDuration;
 
     public SmokeBombEffect(int duration) {
@@ -20,7 +22,7 @@ public class SmokeBombEffect implements StatusEffect {
 
     @Override
     public void onApply(Combatant target) {
-        // Effect is checked in BattleContext.isSmokeBombActive()
+        // No stat changes needed
     }
 
     @Override
