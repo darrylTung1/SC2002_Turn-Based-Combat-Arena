@@ -14,23 +14,20 @@ import java.util.List;
  * Core battle management engine.
  * DIP: Depends on abstractions (TurnOrderStrategy, Action, BattleUI) — not concrete classes.
  * SRP: Manages battle flow only — no UI creation, no entity creation.
- * OCP fix: instanceof chains on Action/Item types removed; target resolution is now delegated to Action.resolveTarget().
+ * OCP: instanceof chains on Action/Item types removed; target resolution delegated to Action.resolveTarget().
  */
 public class BattleEngine {
     private final TurnOrderStrategy turnOrderStrategy;
     private final BattleUI ui;
-    private BattleContext context;
-    private boolean backupSpawned;
 
     public BattleEngine(TurnOrderStrategy turnOrderStrategy, BattleUI ui) {
         this.turnOrderStrategy = turnOrderStrategy;
         this.ui = ui;
-        this.backupSpawned = false;
     }
 
     public BattleResult startBattle(Player player, Level level) {
-        context = new BattleContext(player, level.getInitialSpawn());
-        backupSpawned = false;
+        BattleContext context = new BattleContext(player, level.getInitialSpawn());
+        boolean backupSpawned = false;
 
         ui.displayBattleStart(player, context.getAllEnemies());
 
@@ -38,7 +35,7 @@ public class BattleEngine {
             context.incrementRound();
             ui.displayRoundStart(context.getCurrentRound());
 
-            executeRound();
+            executeRound(context);
 
             if (!backupSpawned && context.allEnemiesDefeated() && level.hasBackupSpawn()) {
                 List<Enemy> backup = level.getBackupSpawn();
@@ -59,7 +56,7 @@ public class BattleEngine {
         }
     }
 
-    private void executeRound() {
+    private void executeRound(BattleContext context) {
         List<Combatant> turnOrder = turnOrderStrategy.determineTurnOrder(
                 context.getAliveCombatants()
         );
@@ -73,7 +70,7 @@ public class BattleEngine {
                 continue;
             }
 
-            executeTurn(combatant);
+            executeTurn(combatant, context);
 
             if (context.isPlayerDefeated() || context.allEnemiesDefeated()) break;
         }
@@ -85,10 +82,10 @@ public class BattleEngine {
 
     /**
      * Execute a single combatant's turn.
-     * OCP fix: uses Action.resolveTarget() so no instanceof chains are needed when new Action types are added.
+     * OCP: uses Action.resolveTarget() so no instanceof chains are needed when new Action types are added.
      */
-    private void executeTurn(Combatant combatant) {
-        Action action = chooseAction(combatant);
+    private void executeTurn(Combatant combatant, BattleContext context) {
+        Action action = chooseAction(combatant, context);
         Combatant target = action.resolveTarget(context);
         int oldHp = target != null ? target.getHp() : 0;
 
@@ -102,9 +99,10 @@ public class BattleEngine {
 
     /**
      * Choose the action for the given combatant.
-     * DIP note: the instanceof dispatch here is unavoidable without adding UI coupling to Combatant. It is isolated to this single method to minimise impact.
+     * DIP note: the instanceof dispatch here is unavoidable without adding UI coupling to Combatant.
+     * Isolated to this single method to minimise impact.
      */
-    private Action chooseAction(Combatant combatant) {
+    private Action chooseAction(Combatant combatant, BattleContext context) {
         if (combatant instanceof Player player) {
             return ui.getPlayerAction(player, context);
         } else if (combatant instanceof Enemy enemy) {
