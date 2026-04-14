@@ -6,8 +6,6 @@ import combat.item.Item;
 import combat.level.Difficulty;
 import combat.level.Level;
 import combat.model.Player;
-import combat.model.Warrior;
-import combat.model.Wizard;
 import combat.strategy.SpeedBasedTurnOrder;
 
 import java.util.List;
@@ -29,10 +27,9 @@ public class GameController {
 
         while (running) {
             // Setup phase
-        	Player originalPlayer = ui.selectPlayer();
-            List<Item> items = ui.selectItems();
-            
-            Difficulty difficulty = ui.selectDifficulty();
+        	Player selectedPlayer = ui.selectPlayer();
+        	List<Item> selectedItems = ui.selectItems();
+        	Difficulty difficulty = ui.selectDifficulty();
 
             int levelNumber = switch (difficulty) {
                 case EASY -> 1;
@@ -43,15 +40,8 @@ public class GameController {
             boolean inCurrentSetup = true;
 
             while (running && inCurrentSetup) {
-            	Player battlePlayer;
-
-                if (originalPlayer instanceof Warrior) {
-                    battlePlayer = new Warrior();
-                } else {
-                    battlePlayer = new Wizard();
-                }
-
-                items.forEach(battlePlayer::addItem);
+            	Player battlePlayer = createFreshPlayer(selectedPlayer);
+            	selectedItems.forEach(battlePlayer::addItem);
                 Level level = new Level(difficulty, levelNumber);
                 BattleEngine engine = new BattleEngine(
                         new SpeedBasedTurnOrder(),
@@ -82,5 +72,17 @@ public class GameController {
         }
 
         System.out.println("Thanks for playing!");
+    }
+    
+    
+    /* Recreate a fresh player instance of the same class for replay.*/
+    private Player createFreshPlayer(Player template) {
+        try {
+            return template.getClass().getDeclaredConstructor().newInstance();
+        } catch (Exception e) {
+            throw new IllegalStateException(
+                    "Unable to recreate player of type: " + template.getClass().getSimpleName(), e
+            );
+        }
     }
 }
