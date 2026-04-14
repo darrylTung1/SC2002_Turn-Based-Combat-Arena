@@ -66,7 +66,6 @@ public class BattleEngine {
 
             if (combatant.hasEffect(StunEffect.class)) {
                 ui.displayStunned(combatant);
-                if (combatant instanceof Player player) player.decrementCooldown();
                 continue;
             }
 
@@ -89,9 +88,9 @@ public class BattleEngine {
         Combatant target = action.resolveTarget(context);
         int oldHp = target != null ? target.getHp() : 0;
 
-        action.execute(combatant, context);
-
         if (combatant instanceof Player player) player.decrementCooldown();
+
+        action.execute(combatant, context);
 
         int newHp = target != null ? target.getHp() : 0;
         ui.displayActionResult(combatant, action, context, target, oldHp, newHp);
@@ -103,11 +102,11 @@ public class BattleEngine {
      * Isolated to this single method to minimise impact.
      */
     private Action chooseAction(Combatant combatant, BattleContext context) {
-        if (combatant instanceof Player player) {
-            return ui.getPlayerAction(player, context);
-        } else if (combatant instanceof Enemy enemy) {
-            return enemy.getActionStrategy().chooseAction(enemy, context);
-        }
-        throw new IllegalStateException("Unknown combatant type: " + combatant.getClass());
+        return switch (combatant) {
+            case Player player -> ui.getPlayerAction(player, context);
+            case Enemy enemy -> enemy.getActionStrategy().chooseAction(enemy, context);
+            case null -> throw new IllegalStateException("combatant is null");
+            default -> throw new IllegalStateException("Unknown combatant type: " + combatant.getClass());
+        };
     }
 }

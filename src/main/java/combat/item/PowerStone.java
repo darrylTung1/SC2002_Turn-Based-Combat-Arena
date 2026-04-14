@@ -13,7 +13,8 @@ public class PowerStone implements Item {
     @Override
     public void use(Player user, BattleContext context) {
         // Save current cooldown, execute special skill, restore cooldown
-        int savedCooldown = user.getSpecialSkillCooldown();
+        // Decrement already ran before this action executes, so restore pre-decrement value.
+        int savedCooldown = user.getSpecialSkillCooldown() + 1;
         user.executeSpecialSkill(
                 context.getSelectedTarget(),
                 context.getAliveEnemies()

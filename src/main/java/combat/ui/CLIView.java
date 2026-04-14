@@ -30,26 +30,31 @@ public class CLIView implements GameUI {
 
     @Override
     public Player selectPlayer() {
+        Warrior warrior = new Warrior();
+        Wizard wizard = new Wizard();
+
         System.out.println("=== SELECT YOUR CHARACTER ===");
-        System.out.println("1. Warrior - HP:260 ATK:40 DEF:20 SPD:30 | Shield Bash");
-        System.out.println("2. Wizard  - HP:200 ATK:50 DEF:10 SPD:20 | Arcane Blast");
+        System.out.println("1. " + warrior + " | Special: " + warrior.getSpecialSkillName());
+        System.out.println("2. " + wizard  + " | Special: " + wizard.getSpecialSkillName());
         System.out.print("Choose (1-2): ");
 
         int choice = readInt(1, 2);
-        return choice == 1 ? new Warrior() : new Wizard();
+        return choice == 1 ? warrior : wizard;
     }
 
     @Override
     public List<Item> selectItems() {
+        Item[] catalogue = { new Potion(), new PowerStone(), new SmokeBomb() };
+
         System.out.println("\n=== SELECT 2 ITEMS (duplicates allowed) ===");
-        System.out.println("1. Potion      - Heals 100 HP");
-        System.out.println("2. Power Stone - Free special skill use");
-        System.out.println("3. Smoke Bomb  - Enemy attacks deal 0 damage (2 turns)");
+        for (int i = 0; i < catalogue.length; i++) {
+            System.out.println((i + 1) + ". " + catalogue[i].getName() + " - " + catalogue[i].getDescription());
+        }
 
         List<Item> items = new ArrayList<>();
         for (int i = 1; i <= 2; i++) {
-            System.out.print("Item " + i + " (1-3): ");
-            int choice = readInt(1, 3);
+            System.out.print("Item " + i + " (1-" + catalogue.length + "): ");
+            int choice = readInt(1, catalogue.length);
             items.add(createItem(choice));
         }
         return items;
@@ -57,6 +62,10 @@ public class CLIView implements GameUI {
 
     @Override
     public Difficulty selectDifficulty() {
+        System.out.println("\n=== ENEMIES ===");
+        System.out.println(new Goblin());
+        System.out.println(new Wolf());
+
         System.out.println("\n=== SELECT DIFFICULTY ===");
         System.out.println("1. Easy   - 3 Goblins");
         System.out.println("2. Medium - 1 Goblin + 1 Wolf | Backup: 2 Wolves");
@@ -134,7 +143,11 @@ public class CLIView implements GameUI {
         System.out.println("\n" + player.getName() + "'s turn! HP: " + player.getHp() + "/" + player.getMaxHp());
         System.out.println("1. Basic Attack");
         System.out.println("2. Defend");
-        System.out.println("3. Use Item");
+        if (player.hasItems()) {
+            System.out.println("3. Use Item");
+        } else {
+            System.out.println("3. Use Item (No items remaining)");
+        }
 
         int maxOption = 3;
         if (player.isSpecialSkillReady()) {
