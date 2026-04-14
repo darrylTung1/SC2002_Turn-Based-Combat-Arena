@@ -34,16 +34,13 @@ public class GameController {
         boolean running = true;
 
         while (running) {
-<<<<<<< HEAD
             // Setup phase
         	Player selectedPlayer = ui.selectPlayer();
         	List<Item> selectedItems = ui.selectItems();
         	Difficulty difficulty = ui.selectDifficulty();
-=======
             Player originalPlayer = ui.selectPlayer();
             List<Item> originalItems = ui.selectItems();
             Difficulty difficulty = ui.selectDifficulty();
->>>>>>> 5b4d3ffc3eab76116ed5985045465bb7708ffa3f
 
             int levelNumber = switch (difficulty) {
                 case EASY -> 1;
@@ -54,14 +51,11 @@ public class GameController {
             boolean inCurrentSetup = true;
 
             while (running && inCurrentSetup) {
-<<<<<<< HEAD
             	Player battlePlayer = createFreshPlayer(selectedPlayer);
             	createFreshItems(selectedItems).forEach(battlePlayer::addItem);
-=======
                 Player battlePlayer = originalPlayer.createFresh();
                 createFreshItems(originalItems).forEach(battlePlayer::addItem);
 
->>>>>>> 5b4d3ffc3eab76116ed5985045465bb7708ffa3f
                 Level level = new Level(difficulty, levelNumber);
                 BattleEngine engine = new BattleEngine(
                         new SpeedBasedTurnOrder(),
@@ -75,11 +69,8 @@ public class GameController {
 
                     switch (choice) {
                         case REPLAY -> {
-<<<<<<< HEAD
                             // same settings, battle restarts
-=======
                             // Replay with same settings
->>>>>>> 5b4d3ffc3eab76116ed5985045465bb7708ffa3f
                         }
                         case NEW_GAME -> inCurrentSetup = false;
                         case EXIT -> {
@@ -97,7 +88,6 @@ public class GameController {
 
         System.out.println("Thanks for playing!");
     }
-<<<<<<< HEAD
     
     
     /* Recreate a fresh player instance of the same class for replay.*/
@@ -126,7 +116,6 @@ public class GameController {
         }
     }
 }
-=======
 
     private List<Item> createFreshItems(List<Item> templates) {
         return templates.stream()
@@ -134,4 +123,3 @@ public class GameController {
                 .toList();
     }
 }
->>>>>>> 5b4d3ffc3eab76116ed5985045465bb7708ffa3f

@@ -29,8 +29,6 @@ public class PowerStone implements Item {
     public String getDescription() {
         return "Triggers special skill without affecting cooldown";
     }
-<<<<<<< HEAD
-=======
 
     @Override
     public boolean requiresTarget() {
@@ -45,5 +43,4 @@ public class PowerStone implements Item {
     public Item createFresh() {
         return new PowerStone();
     }
->>>>>>> 5b4d3ffc3eab76116ed5985045465bb7708ffa3f
 }

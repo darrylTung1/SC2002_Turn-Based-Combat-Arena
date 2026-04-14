@@ -26,8 +26,6 @@ public interface Item {
      * @return description of what this item does
      */
     String getDescription();
-<<<<<<< HEAD
-=======
 
     // Whether this item requires the player to select a target before use
     boolean requiresTarget();
@@ -36,5 +34,4 @@ public interface Item {
     Combatant resolveTarget(Player user, BattleContext context);
     
     Item createFresh();
->>>>>>> 5b4d3ffc3eab76116ed5985045465bb7708ffa3f
 }

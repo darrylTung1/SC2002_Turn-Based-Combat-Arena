@@ -23,8 +23,6 @@ public class Potion implements Item {
     public String getDescription() {
         return "Heals " + HEAL_AMOUNT + " HP (capped at max HP)";
     }
-<<<<<<< HEAD
-=======
 
     @Override
     public boolean requiresTarget() {
@@ -39,5 +37,4 @@ public class Potion implements Item {
     public Item createFresh() {
         return new Potion();
     }
->>>>>>> 5b4d3ffc3eab76116ed5985045465bb7708ffa3f
 }
