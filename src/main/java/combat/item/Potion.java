@@ -1,6 +1,7 @@
 package combat.item;
 
 import combat.engine.BattleContext;
+import combat.model.Combatant;
 import combat.model.Player;
 
 /**
@@ -22,5 +23,15 @@ public class Potion implements Item {
     @Override
     public String getDescription() {
         return "Heals " + HEAL_AMOUNT + " HP (capped at max HP)";
+    }
+
+    @Override
+    public boolean requiresTarget() {
+        return false;
+    }
+
+    @Override
+    public Combatant resolveTarget(Player user, BattleContext context) {
+        return user;
     }
 }
