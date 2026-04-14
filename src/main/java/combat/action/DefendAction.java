@@ -4,16 +4,15 @@ import combat.engine.BattleContext;
 import combat.effect.DefendBuff;
 import combat.model.Combatant;
 
-// Defend action
-
-// Increases defense by 10 for current and next round [2 turns]
+// Defend action — applies a DefendBuff that increases defense by 10 for 2 turns.
 
 public class DefendAction implements Action {
 
     @Override
     public void execute(Combatant actor, BattleContext context) {
-        actor.addStatusEffect(new DefendBuff(2)); // Current + next round
-        actor.modifyDefense(10);
+        DefendBuff buff = new DefendBuff(2);
+        actor.addStatusEffect(buff);
+        buff.onApply(actor); // Delegate stat modification to the buff — keeps logic self-contained
     }
 
     @Override
@@ -23,6 +22,11 @@ public class DefendAction implements Action {
 
     @Override
     public boolean isAvailable(Combatant actor, BattleContext context) {
-        return true; // Always available
+        return true;
+    }
+
+    @Override
+    public Combatant resolveTarget(BattleContext context) {
+        return null; // Self-effect, no distinct target
     }
 }
