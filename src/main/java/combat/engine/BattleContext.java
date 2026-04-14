@@ -1,25 +1,22 @@
 package combat.engine;
 
-import combat.effect.SmokeBombEffect;
 import combat.model.Combatant;
 import combat.model.Enemy;
 import combat.model.Player;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 /**
  * Holds the current state of a battle.
- * Passed to Actions and Items so they can query/modify battle state
- * without coupling to BattleEngine internals.
+ * Passed to Actions and Items so they can query/modify battle state without coupling to BattleEngine internals.
  * SRP: Only manages battle state, no logic.
  */
 public class BattleContext {
     private final Player player;
     private final List<Enemy> enemies;
     private int currentRound;
-    private Combatant selectedTarget; // For UI-selected targets
+    private Combatant selectedTarget;
 
     public BattleContext(Player player, List<Enemy> enemies) {
         this.player = player;
@@ -50,10 +47,6 @@ public class BattleContext {
 
     public void addEnemies(List<Enemy> newEnemies) {
         enemies.addAll(newEnemies);
-    }
-
-    public boolean isSmokeBombActive() {
-        return player.hasEffect(SmokeBombEffect.class);
     }
 
     public int getCurrentRound() {

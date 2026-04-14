@@ -36,8 +36,4 @@ public class SmokeBomb implements Item {
     public Combatant resolveTarget(Player user, BattleContext context) {
         return user;
     }
-    @Override
-    public Item createFresh() {
-        return new SmokeBomb();
-    }
 }

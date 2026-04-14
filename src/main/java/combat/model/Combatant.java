@@ -82,6 +82,13 @@ public abstract class Combatant {
         return new ArrayList<>(statusEffects);
     }
 
+    public int applyDamageModifiers(int damage) {
+        for (StatusEffect effect : statusEffects) {
+            damage = effect.modifyIncomingDamage(damage);
+        }
+        return damage;
+    }
+
     // Stat Modification
     public void modifyAttack(int amount) {
         this.attack += amount;

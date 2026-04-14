@@ -5,20 +5,16 @@ import combat.model.Combatant;
 /**
  * Arcane Blast buff — tracks ATK bonus gained from Arcane Blast kills.
  * Each kill adds +10 ATK, persisting until end of level.
- * Duration is effectively infinite (set very high, removed on level end).
+ * Duration is effectively infinite (Integer.MAX_VALUE); manually expired via expire().
  */
-public class ArcaneBlastBuff implements StatusEffect {
+public class ArcaneBlastBuff extends StatusEffect {
     private int bonusAttack;
-    private boolean expired;
 
     public ArcaneBlastBuff(int bonusAttack) {
+        super(Integer.MAX_VALUE);
         this.bonusAttack = bonusAttack;
-        this.expired = false;
     }
 
-    /**
-     * Stack additional ATK bonus from subsequent Arcane Blast kills.
-     */
     public void addBonus(int additional, Combatant target) {
         this.bonusAttack += additional;
         target.modifyAttack(additional);
@@ -43,21 +39,8 @@ public class ArcaneBlastBuff implements StatusEffect {
         target.modifyAttack(-bonusAttack);
     }
 
-    /**
-     * Call this at end of level to remove the buff.
-     */
     public void expire() {
-        this.expired = true;
-    }
-
-    @Override
-    public boolean isExpired() {
-        return expired;
-    }
-
-    @Override
-    public int getRemainingDuration() {
-        return expired ? 0 : Integer.MAX_VALUE;
+        remainingDuration = 0;
     }
 
     @Override

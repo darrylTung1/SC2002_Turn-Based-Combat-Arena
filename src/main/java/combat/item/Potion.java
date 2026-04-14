@@ -34,8 +34,4 @@ public class Potion implements Item {
     public Combatant resolveTarget(Player user, BattleContext context) {
         return user;
     }
-    @Override
-    public Item createFresh() {
-        return new Potion();
-    }
 }

@@ -7,13 +7,21 @@ import combat.level.Difficulty;
 import combat.level.Level;
 import combat.model.Player;
 import combat.strategy.TurnOrderStrategy;
+<<<<<<< HEAD
 
+=======
+>>>>>>> e96d39b (refactor status effect hierarchy and damage handling)
 import java.util.List;
 
 /**
  * Controller that orchestrates the game lifecycle.
+<<<<<<< HEAD
  * Connects UI <-> Engine. Handles replay/new-game loop.
+=======
+ * Connects UI  <-> Engine. Handles replay/new-game loop.
+>>>>>>> e96d39b (refactor status effect hierarchy and damage handling)
  * SRP: Only game flow orchestration.
+ * LSP: uses Player.createFresh() instead of instanceof Warrior/Wizard to clone the player.
  */
 public class GameController {
     private final GameUI ui;
@@ -29,7 +37,7 @@ public class GameController {
 
         while (running) {
             Player originalPlayer = ui.selectPlayer();
-            List<Item> originalItems = ui.selectItems();
+            List<Item> items = ui.selectItems();
             Difficulty difficulty = ui.selectDifficulty();
 
             int levelNumber = switch (difficulty) {
@@ -41,8 +49,12 @@ public class GameController {
             boolean inCurrentSetup = true;
 
             while (running && inCurrentSetup) {
+<<<<<<< HEAD
+=======
+                // LSP fix: no instanceof — every Player subclass knows how to clone itself.
+>>>>>>> e96d39b (refactor status effect hierarchy and damage handling)
                 Player battlePlayer = originalPlayer.createFresh();
-                createFreshItems(originalItems).forEach(battlePlayer::addItem);
+                items.forEach(battlePlayer::addItem);
 
                 Level level = new Level(difficulty, levelNumber);
                 BattleEngine engine = new BattleEngine(turnOrderStrategy, ui);
@@ -51,11 +63,14 @@ public class GameController {
 
                 if (result == BattleResult.DEFEAT) {
                     PostBattleChoice choice = ui.promptReplay();
-
                     switch (choice) {
+<<<<<<< HEAD
                         case REPLAY -> {
                             // Replay with same settings
                         }
+=======
+                        case REPLAY -> { /* same settings, restart battle */ }
+>>>>>>> e96d39b (refactor status effect hierarchy and damage handling)
                         case NEW_GAME -> inCurrentSetup = false;
                         case EXIT -> {
                             running = false;
@@ -71,6 +86,7 @@ public class GameController {
 
         System.out.println("Thanks for playing!");
     }
+<<<<<<< HEAD
 
     private List<Item> createFreshItems(List<Item> templates) {
         return templates.stream()
@@ -78,3 +94,6 @@ public class GameController {
                 .toList();
     }
 }
+=======
+}
+>>>>>>> e96d39b (refactor status effect hierarchy and damage handling)

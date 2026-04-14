@@ -59,6 +59,14 @@ public abstract class Player extends Combatant {
 
     // Returns the name of the special skill
     public abstract String getSpecialSkillName();
+<<<<<<< HEAD
     
+=======
+
+    /**
+     * Create a fresh instance of this player class with base stats and no items.
+     * LSP fix: GameController no longer needs instanceof to clone the player type.
+     */
+>>>>>>> e96d39b (refactor status effect hierarchy and damage handling)
     public abstract Player createFresh();
 }
