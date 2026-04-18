@@ -56,5 +56,5 @@ Backup spawns only after ALL initial enemies are defeated.
 - **Potion**: Heal 100 HP — `New HP = min(Current HP + 100, Max HP)`
 - **Power Stone**: Triggers special skill once without starting or changing the cooldown timer (free extra use)
 - **Smoke Bomb**: Enemy attacks deal 0 damage for the current turn and the next turn
-- **Lightning Orb**: AoE hit on all enemies — 30 dmg, or 40 to stunned targets; applies Paralysis (-5 DEF) for 2 turns
+- **Lightning Orb**: AoE hit on all enemies — 30 dmg (40 bonus dmg to stunned targets); applies Paralysis (-5 DEF) for 2 turns
 - Two single-use items chosen at game start; duplicates allowed
