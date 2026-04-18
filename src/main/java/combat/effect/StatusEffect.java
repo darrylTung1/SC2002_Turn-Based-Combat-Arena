@@ -19,9 +19,9 @@ public abstract class StatusEffect {
         remainingDuration--;
     }
 
-    public abstract void onApply(Combatant target);
+    public void onApply(Combatant target) {}
 
-    public abstract void onExpire(Combatant target);
+    public void onExpire(Combatant target) {}
 
     public boolean isExpired() {
         return remainingDuration <= 0;
@@ -39,5 +39,9 @@ public abstract class StatusEffect {
      */
     public int modifyIncomingDamage(int damage) {
         return damage;
+    }
+
+    public boolean preventsAction() {
+        return false;
     }
 }

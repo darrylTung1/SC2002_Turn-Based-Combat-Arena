@@ -59,8 +59,9 @@ public abstract class Player extends Combatant {
     // Execute the class-specific special skill.
     public abstract void executeSpecialSkill(Combatant target, List<Combatant> allEnemies);
 
-    // Returns the name of the special skill.
     public abstract String getSpecialSkillName();
+
+    public abstract String getSpecialSkillDescription();
 
     /**
      * Create a fresh instance of this player class with base stats and no items.

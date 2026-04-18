@@ -1,7 +1,7 @@
 package combat.engine;
 
 import combat.action.Action;
-import combat.effect.StunEffect;
+import combat.effect.StatusEffect;
 import combat.level.Level;
 import combat.model.Combatant;
 import combat.model.Enemy;
@@ -64,10 +64,12 @@ public class BattleEngine {
         for (Combatant combatant : turnOrder) {
             if (!combatant.isAlive()) continue;
 
-            if (combatant.hasEffect(StunEffect.class)) {
-                ui.displayStunned(combatant);
-                continue;
-            }
+            boolean actionPrevented = combatant.getStatusEffects().stream()
+                    .filter(StatusEffect::preventsAction)
+                    .findFirst()
+                    .map(effect -> { ui.displayActionSkipped(combatant, effect.getName()); return true; })
+                    .orElse(false);
+            if (actionPrevented) continue;
 
             executeTurn(combatant, context);
 
@@ -85,15 +87,15 @@ public class BattleEngine {
      */
     private void executeTurn(Combatant combatant, BattleContext context) {
         Action action = chooseAction(combatant, context);
-        Combatant target = action.resolveTarget(context);
-        int oldHp = target != null ? target.getHp() : 0;
+
+        List<Combatant> combatants = context.getAliveCombatants();
+        int[] hpBefore = combatants.stream().mapToInt(Combatant::getHp).toArray();
 
         if (combatant instanceof Player player) player.decrementCooldown();
 
         action.execute(combatant, context);
 
-        int newHp = target != null ? target.getHp() : 0;
-        ui.displayActionResult(combatant, action, context, target, oldHp, newHp);
+        ui.displayActionResult(combatant, action, context, combatants, hpBefore);
     }
 
     /**

@@ -27,7 +27,7 @@ public class UseItemAction implements Action {
 
     @Override
     public String getName() {
-        return "Use Item";
+        return selectedItem != null ? "Use " + selectedItem.getName() : "Use Item";
     }
 
     @Override

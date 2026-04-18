@@ -105,12 +105,8 @@ public abstract class Combatant {
         this.defense += amount;
     }
 
-    public void resetDefense() {
-        this.defense = baseDefense;
-    }
-
-    public void resetAttack() {
-        this.attack = baseAttack;
+    public int calculateDamageTo(Combatant target) {
+        return Math.max(0, this.attack - target.getDefense());
     }
 
     // Getters

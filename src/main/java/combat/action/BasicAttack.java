@@ -20,7 +20,7 @@ public class BasicAttack implements Action {
     public void execute(Combatant actor, BattleContext context) {
         if (target == null || !target.isAlive()) return;
 
-        int damage = Math.max(0, actor.getAttack() - target.getDefense());
+        int damage = actor.calculateDamageTo(target);
         target.takeDamage(target.applyDamageModifiers(damage));
     }
 
