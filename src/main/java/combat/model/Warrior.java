@@ -18,8 +18,7 @@ public class Warrior extends Player {
 
     @Override
     public void executeSpecialSkill(Combatant target, List<Combatant> allEnemies) {
-        // Deal BasicAttack damage to selected enemy
-        int damage = Math.max(0, this.getAttack() - target.getDefense());
+        int damage = this.calculateDamageTo(target);
         target.takeDamage(damage);
 
         // Stun target: unable to act for current turn + next turn (2 turns total)
@@ -32,6 +31,11 @@ public class Warrior extends Player {
     public String getSpecialSkillName() {
         return "Shield Bash";
     }
+    @Override
+    public String getSpecialSkillDescription() {
+        return "Deal BasicAttack damage to selected enemy. Enemy cannot act for the current and next turn.";
+    }
+
     @Override
     public Player createFresh() {
         return new Warrior();

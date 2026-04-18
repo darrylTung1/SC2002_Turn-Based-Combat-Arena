@@ -26,9 +26,9 @@ public interface BattleUI {
     void displayBattleStart(Player player, List<Enemy> enemies);
     void displayRoundStart(int roundNumber);
     void displayRoundEnd(BattleContext context);
-    void displayStunned(Combatant combatant);
+    void displayActionSkipped(Combatant combatant, String reason);
     void displayBackupSpawn(List<Enemy> backup);
-    void displayActionResult(Combatant actor, Action action, BattleContext context, Combatant target, int oldHp, int newHp);
+    void displayActionResult(Combatant actor, Action action, BattleContext context, List<Combatant> combatants, int[] hpBefore);
 
     // Player Input
     Action getPlayerAction(Player player, BattleContext context);

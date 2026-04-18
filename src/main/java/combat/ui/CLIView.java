@@ -1,6 +1,7 @@
 package combat.ui;
 
 import combat.action.*;
+import combat.effect.StatusEffect;
 import combat.engine.BattleContext;
 import combat.item.Item;
 import combat.item.Potion;
@@ -9,8 +10,10 @@ import combat.item.SmokeBomb;
 import combat.level.Difficulty;
 import combat.model.*;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 
 /**
@@ -32,8 +35,10 @@ public class CLIView implements GameUI {
         Wizard wizard = new Wizard();
 
         System.out.println("=== SELECT YOUR CHARACTER ===");
-        System.out.println("1. " + warrior + " | Special: " + warrior.getSpecialSkillName());
-        System.out.println("2. " + wizard  + " | Special: " + wizard.getSpecialSkillName());
+        System.out.println("1. " + warrior);
+        System.out.println("   Special: " + warrior.getSpecialSkillName() + " — " + warrior.getSpecialSkillDescription());
+        System.out.println("2. " + wizard);
+        System.out.println("   Special: " + wizard.getSpecialSkillName() + " — " + wizard.getSpecialSkillDescription());
         System.out.print("Choose (1-2): ");
         
         int choice = readInt(1,2);
@@ -42,7 +47,7 @@ public class CLIView implements GameUI {
 
     @Override
     public List<Item> selectItems() {
-    	Item[] catalogue = { new Potion(), new PowerStone(), new SmokeBomb(), new LightningOrb() };
+        Item[] catalogue = { new Potion(), new PowerStone(), new SmokeBomb() };
 
         System.out.println("\n=== SELECT 2 ITEMS (duplicates allowed) ===");
         for (int i = 0; i < catalogue.length; i++) {
@@ -101,17 +106,49 @@ public class CLIView implements GameUI {
 
     @Override
     public void displayRoundEnd(BattleContext context) {
+        Player player = context.getPlayer();
         System.out.println("\n[End of Round " + context.getCurrentRound() + "]");
-        System.out.println("  " + context.getPlayer());
+
+        // Player line: HP | items | cooldown
+        StringBuilder playerLine = new StringBuilder();
+        playerLine.append("  ").append(player.getName())
+                  .append(" HP: ").append(player.getHp()).append("/").append(player.getMaxHp());
+
+        LinkedHashMap<String, Integer> itemCounts = new LinkedHashMap<>();
+        for (Item item : player.getItems()) {
+            itemCounts.merge(item.getName(), 1, Integer::sum);
+        }
+        if (itemCounts.isEmpty()) {
+            playerLine.append(" | No items remaining");
+        } else {
+            for (var entry : itemCounts.entrySet()) {
+                playerLine.append(" | ").append(entry.getKey()).append(": ").append(entry.getValue());
+            }
+        }
+
+        int cooldown = player.getSpecialSkillCooldown();
+        playerLine.append(" | ").append(player.getSpecialSkillName())
+                  .append(" Cooldown: ").append(cooldown == 0 ? "Ready" : cooldown + " rounds");
+        System.out.println(playerLine);
+
+        // Enemy lines: HP + active effects / eliminated status
         for (var enemy : context.getAllEnemies()) {
-            String status = enemy.isAlive() ? enemy.toString() : enemy.getName() + " [ELIMINATED]";
-            System.out.println("  " + status);
+            if (!enemy.isAlive()) {
+                System.out.println("  " + enemy.getName() + " [ELIMINATED]");
+            } else {
+                String effects = enemy.getStatusEffects().stream()
+                        .map(StatusEffect::getName)
+                        .filter(name -> !name.isEmpty())
+                        .collect(Collectors.joining(", "));
+                String statusDisplay = effects.isEmpty() ? "" : " [" + effects + "]";
+                System.out.println("  " + enemy.getName() + " HP: " + enemy.getHp() + "/" + enemy.getMaxHp() + statusDisplay);
+            }
         }
     }
 
     @Override
-    public void displayStunned(Combatant combatant) {
-        System.out.println(combatant.getName() + " is STUNNED! Turn skipped.");
+    public void displayActionSkipped(Combatant combatant, String reason) {
+        System.out.println(combatant.getName() + " is " + reason + "! Turn skipped.");
     }
 
     @Override
@@ -123,10 +160,17 @@ public class CLIView implements GameUI {
     }
 
     @Override
-    public void displayActionResult(Combatant actor, Action action, BattleContext context, Combatant target, int oldHp, int newHp) {
+    public void displayActionResult(Combatant actor, Action action, BattleContext context, List<Combatant> combatants, int[] hpBefore) {
         System.out.println(actor.getName() + " used " + action.getName() + ".");
-        if (target != null) {
-            System.out.println(target.getName() + ": HP " + oldHp + " -> " + newHp);
+        for (int i = 0; i < combatants.size(); i++) {
+            int before = hpBefore[i];
+            int after = combatants.get(i).getHp();
+            if (before != after) {
+                int diff = before - after;
+                String change = diff > 0 ? "(dmg: " + diff + ")" : "(healed: " + (-diff) + ")";
+                String eliminated = after == 0 ? " [ELIMINATED]" : "";
+                System.out.println("  " + combatants.get(i).getName() + ": HP " + before + " -> " + after + " " + change + eliminated);
+            }
         }
     }
 
@@ -250,7 +294,6 @@ public class CLIView implements GameUI {
         };
     }
 
-    // =============================================
     // HELPERS
 
     private int readInt(int min, int max) {
@@ -290,7 +333,6 @@ public class CLIView implements GameUI {
             case 1 -> new Potion();
             case 2 -> new PowerStone();
             case 3 -> new SmokeBomb();
-            case 4 -> new LightningOrb();
             default -> new Potion();
         };
     }
