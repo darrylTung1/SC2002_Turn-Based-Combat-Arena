@@ -8,6 +8,7 @@ import combat.item.PowerStone;
 import combat.item.SmokeBomb;
 import combat.level.Difficulty;
 import combat.model.*;
+import combat.item.LightningOrb;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +45,7 @@ public class CLIView implements GameUI {
 
     @Override
     public List<Item> selectItems() {
-        Item[] catalogue = { new Potion(), new PowerStone(), new SmokeBomb() };
+    	Item[] catalogue = { new Potion(), new PowerStone(), new SmokeBomb(), new LightningOrb() };
 
         System.out.println("\n=== SELECT 2 ITEMS (duplicates allowed) ===");
         for (int i = 0; i < catalogue.length; i++) {
@@ -303,6 +304,7 @@ public class CLIView implements GameUI {
             case 1 -> new Potion();
             case 2 -> new PowerStone();
             case 3 -> new SmokeBomb();
+            case 4 -> new LightningOrb();
             default -> new Potion();
         };
     }
