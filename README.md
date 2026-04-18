@@ -13,6 +13,14 @@ A turn-based combat game built in Java for SC2002.
 2. All files use `package combat.*` — make sure your project structure matches
 3. Run `combat.App` to start
 
+## Status Effects
+
+- **Stun** — cannot act for current turn and next turn
+- **Defend** — +10 DEF for current turn and next turn
+- **Smoke Bomb** — incoming attacks deal 0 damage for current turn and next turn
+- **Arcane Blast** — +10 ATK per kill from Arcane Blast, stacks, lasts until end of level
+- **Paralysis** — -5 DEF for 2 turns (applied by Lightning Orb)
+
 ## Key Rules From The Spec
 
 - Damage = `max(0, ATK - DEF)`, HP clamped at 0
@@ -23,9 +31,30 @@ A turn-based combat game built in Java for SC2002.
 - HP cannot go below 0
 - No draw — game always ends in win or loss
 
+## Characters
+
+**Players**
+- **Warrior** — HP: 260 | ATK: 40 | DEF: 20 | SPD: 30
+  - Special: Shield Bash — deal BasicAttack damage to target, stun for 2 turns (cooldown: 3)
+- **Wizard** — HP: 200 | ATK: 50 | DEF: 10 | SPD: 20
+  - Special: Arcane Blast — deal BasicAttack damage to all enemies; each kill adds +10 ATK until end of level (cooldown: 3)
+
+**Enemies**
+- **Goblin** — HP: 55 | ATK: 35 | DEF: 15 | SPD: 25
+- **Wolf** — HP: 40 | ATK: 45 | DEF: 5 | SPD: 35
+
+## Difficulty
+
+- **Easy** — 3 Goblins, no backup
+- **Medium** — 1 Goblin + 1 Wolf | Backup: 2 Wolves
+- **Hard** — 2 Goblins | Backup: 1 Goblin + 2 Wolves
+
+Backup spawns only after ALL initial enemies are defeated.
+
 ## Items
 
 - **Potion**: Heal 100 HP — `New HP = min(Current HP + 100, Max HP)`
 - **Power Stone**: Triggers special skill once without starting or changing the cooldown timer (free extra use)
 - **Smoke Bomb**: Enemy attacks deal 0 damage for the current turn and the next turn
+- **Lightning Orb**: AoE hit on all enemies — 30 dmg, or 40 to stunned targets; applies Paralysis (-5 DEF) for 2 turns
 - Two single-use items chosen at game start; duplicates allowed
