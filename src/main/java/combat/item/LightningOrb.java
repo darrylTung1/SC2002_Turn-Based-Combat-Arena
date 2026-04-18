@@ -10,11 +10,12 @@ import combat.model.Player;
  * Lightning Orb — deals AoE lightning damage to all enemies.
  * Normal enemies take 20 damage.
  * Stunned enemies take 30 damage.
- * Applies Paralysis (defense reduction) for 2 turns.
+ * Applies Paralysis (-10 DEF) for 2 turns.
+ * Reapplying Paralysis stacks.
  */
 public class LightningOrb implements Item {
-    private static final int NORMAL_DAMAGE = 20;
-    private static final int BONUS_DAMAGE = 30;
+    private static final int NORMAL_DAMAGE = 30;
+    private static final int BONUS_DAMAGE = 40;
 
     @Override
     public void use(Player user, BattleContext context) {
@@ -27,6 +28,7 @@ public class LightningOrb implements Item {
                     ? BONUS_DAMAGE
                     : NORMAL_DAMAGE;
 
+            // Lightning damage ignores defense, but still passes through damage modifiers
             int finalDamage = Math.max(0, damage - enemy.getDefense());
             enemy.takeDamage(enemy.applyDamageModifiers(finalDamage));
             int newHp = enemy.getHp();
@@ -37,7 +39,7 @@ public class LightningOrb implements Item {
                 System.out.println("Bonus lightning damage applied to stunned target!");
             }
 
-            if (enemy.isAlive() && !enemy.hasEffect(ParalysisEffect.class)) {
+            if (enemy.isAlive()) {
                 enemy.addStatusEffect(new ParalysisEffect(2));
                 System.out.println(enemy.getName() + " is PARALYZED! DEF reduced.");
             }
@@ -51,7 +53,7 @@ public class LightningOrb implements Item {
 
     @Override
     public String getDescription() {
-        return "AoE lightning: 20 dmg, or 30 to stunned enemies; applies Paralysis (-10 DEF)";
+        return "AoE lightning: 30 dmg, or 40 to stunned enemies; applies Paralysis (-5 DEF)";
     }
 
     @Override
