@@ -214,6 +214,7 @@ public class CLIView implements GameUI {
                 }
                 UseItemAction useItem = new UseItemAction();
                 useItem.setSelectedItem(item);
+                // For Power Stone, need a target
                 if (item.requiresTarget()) {
                     context.setSelectedTarget(selectTarget(context.getAliveEnemies()));
                 }

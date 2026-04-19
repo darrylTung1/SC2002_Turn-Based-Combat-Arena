@@ -52,6 +52,11 @@ public class Wizard extends Player {
     }
 
     @Override
+    public String getSpecialSkillDescription() {
+        return "Deal BasicAttack damage to ALL enemies. Each kill adds +" + KILL_BONUS + " ATK until end of level.";
+    }
+
+    @Override
     public Player createFresh() {
         return new Wizard();
     }
