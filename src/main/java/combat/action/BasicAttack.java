@@ -10,8 +10,6 @@ import combat.model.Combatant;
 public class BasicAttack implements Action {
     private Combatant target;
 
-    public BasicAttack() {}
-
     public void setTarget(Combatant target) {
         this.target = target;
     }

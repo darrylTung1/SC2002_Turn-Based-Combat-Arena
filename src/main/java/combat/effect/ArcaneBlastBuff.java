@@ -38,10 +38,6 @@ public class ArcaneBlastBuff extends StatusEffect {
         target.modifyAttack(-bonusAttack);
     }
 
-    public void expire() {
-        remainingDuration = 0;
-    }
-
     @Override
     public String getName() {
         return "Arcane Blast (+" + bonusAttack + " ATK)";
