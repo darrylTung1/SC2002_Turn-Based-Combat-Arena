@@ -4,11 +4,10 @@ import combat.engine.BattleContext;
 import combat.model.Combatant;
 import combat.model.Player;
 
-/**
- * Interface for all usable items.
- * OCP: New items can be added by implementing this interface.
- * ISP: Minimal interface — only what items need.
- */
+// Interface for all usable items
+    // OCP: New items can be added by implementing this interface
+    // ISP: Minimal interface - only what items need
+    
 public interface Item {
 
     // Use this item. Item is consumed after use

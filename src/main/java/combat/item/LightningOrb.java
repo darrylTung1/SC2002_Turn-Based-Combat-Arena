@@ -6,12 +6,11 @@ import combat.engine.BattleContext;
 import combat.model.Combatant;
 import combat.model.Player;
 
-/**
- * Lightning Orb — deals AoE lightning damage to all enemies.
- * Normal enemies take 30 damage.
- * Stunned enemies take 40 damage.
- * Applies Paralysis (defense reduction) for 2 turns.
- */
+// Lightning Orb - deals AoE lightning damage to all enemies
+    // Normal enemies take 30 damage
+    // Stunned enemies take 40 damage
+// Applies Paralysis (defense reduction) for 2 turns
+
 public class LightningOrb implements Item {
     private static final int NORMAL_DAMAGE = 30;
     private static final int BONUS_DAMAGE = 40;

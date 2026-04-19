@@ -4,9 +4,8 @@ import combat.engine.BattleContext;
 import combat.model.Combatant;
 import combat.model.Player;
 
-/**
- * Power Stone — triggers the player's special skill once WITHOUT starting or changing the cooldown timer.
- */
+// Power stone -> triggers the player's special skill once without starting or changing cooldown timer
+
 public class PowerStone implements Item {
 
     @Override
