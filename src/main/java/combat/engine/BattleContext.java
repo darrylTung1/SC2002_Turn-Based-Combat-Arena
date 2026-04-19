@@ -7,11 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * Holds the current state of a battle.
- * Passed to Actions and Items so they can query/modify battle state without coupling to BattleEngine internals.
- * SRP: Only manages battle state, no logic.
- */
+// Holds current battle state
+// Passed to Actions and Items so they can query/modify battle state without coupling to BattleEngine internals
+    // SRP: Only manages battle state, no logic
+
 public class BattleContext {
     private final Player player;
     private final List<Enemy> enemies;

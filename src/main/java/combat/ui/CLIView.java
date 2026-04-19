@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
+
 /**
  * Command-line implementation of GameUI.
  * SRP: Handles only display and input — no game logic.
@@ -40,8 +41,8 @@ public class CLIView implements GameUI {
         System.out.println("2. " + wizard);
         System.out.println("   Special: " + wizard.getSpecialSkillName() + " — " + wizard.getSpecialSkillDescription());
         System.out.print("Choose (1-2): ");
-
-        int choice = readInt(1, 2);
+        
+        int choice = readInt(1,2);
         return choice == 1 ? warrior : wizard;
     }
 
@@ -189,12 +190,11 @@ public class CLIView implements GameUI {
 
         int maxOption = 3;
         if (player.isSpecialSkillReady()) {
-            System.out.println("4. " + player.getSpecialSkillName()
-                    + " (Special Skill)");
+            System.out.println("4. " + player.getSpecialSkillName() + " (Special Skill)");
             maxOption = 4;
         } else {
             System.out.println("4. " + player.getSpecialSkillName()
-                    + " (Cooldown: " + player.getSpecialSkillCooldown() + ")");
+            + " (Cooldown: " + player.getSpecialSkillCooldown() + ")");
         }
 
         System.out.print("Choose action: ");
@@ -229,9 +229,7 @@ public class CLIView implements GameUI {
                 skill.setTarget(selectTarget(context.getAliveEnemies()));
                 yield skill;
             }
-            default -> {
-                yield getPlayerAction(player, context);
-            }
+            default -> {yield getPlayerAction(player, context);}
         };
     }
 

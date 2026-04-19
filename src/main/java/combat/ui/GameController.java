@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  * Controller that orchestrates the game lifecycle.
- * Connects UI  <-> Engine. Handles replay/new-game loop.
+ * Connects UI <-> Engine. Handles replay/new-game loop.
  * SRP: Only game flow orchestration.
  * LSP: uses Player.createFresh() instead of instanceof Warrior/Wizard to clone the player.
  */
@@ -41,7 +41,6 @@ public class GameController {
             boolean inCurrentSetup = true;
 
             while (running && inCurrentSetup) {
-                // LSP fix: no instanceof — every Player subclass knows how to clone itself.
                 Player battlePlayer = originalPlayer.createFresh();
                 items.forEach(battlePlayer::addItem);
 

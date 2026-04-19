@@ -3,8 +3,8 @@ package combat.model;
 import combat.effect.StunEffect;
 import java.util.List;
 
-// Warrior player class
-// Special Skill: Shield Bash — deals BasicAttack damage to target, stuns for 2 turns
+// Warrior player class.
+ // Special Skill: Shield Bash — deals BasicAttack damage to target, stuns for 2 turns.
 
 public class Warrior extends Player {
     private static final int MAX_HP = 260;
@@ -21,6 +21,7 @@ public class Warrior extends Player {
         int damage = this.calculateDamageTo(target);
         target.takeDamage(damage);
 
+        // Stun target: unable to act for current turn + next turn (2 turns total)
         if (target.isAlive()) {
             target.addStatusEffect(new StunEffect(2));
         }
@@ -29,6 +30,10 @@ public class Warrior extends Player {
     @Override
     public String getSpecialSkillName() {
         return "Shield Bash";
+    }
+    @Override
+    public String getSpecialSkillDescription() {
+        return "Deal BasicAttack damage to selected enemy. Enemy cannot act for the current and next turn.";
     }
 
     @Override

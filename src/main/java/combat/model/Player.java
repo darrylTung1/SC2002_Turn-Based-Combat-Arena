@@ -4,9 +4,9 @@ import combat.item.Item;
 import java.util.ArrayList;
 import java.util.List;
 
-/**Abstract base class for player-controlled combatants.
- * Adds item inventory and special skill cooldown management.
- */
+// Abstract base class for player-controlled combatants.
+
+// Adds item inventory and special skill cooldown management.
 
 public abstract class Player extends Combatant {
     private final List<Item> items;
@@ -19,7 +19,6 @@ public abstract class Player extends Combatant {
     }
 
     // Item Management
-
     public void addItem(Item item) {
         this.items.add(item);
     }
@@ -36,8 +35,7 @@ public abstract class Player extends Combatant {
         items.remove(item);
     }
 
-    // Cooldown Management
-
+    // --- Cooldown Management ---
     public int getSpecialSkillCooldown() {
         return specialSkillCooldown;
     }
@@ -56,7 +54,7 @@ public abstract class Player extends Combatant {
         return specialSkillCooldown == 0;
     }
 
-    // Execute the class-specific special skill.
+    // Execute the class-specific special skill. -> Subclasses must implement their unique ability
     public abstract void executeSpecialSkill(Combatant target, List<Combatant> allEnemies);
 
     public abstract String getSpecialSkillName();

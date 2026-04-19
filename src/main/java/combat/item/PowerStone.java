@@ -5,8 +5,7 @@ import combat.model.Combatant;
 import combat.model.Player;
 
 /**
- * Power Stone — triggers the player's special skill once
- * WITHOUT starting or changing the cooldown timer.
+ * Power Stone — triggers the player's special skill once WITHOUT starting or changing the cooldown timer.
  */
 public class PowerStone implements Item {
 
@@ -20,7 +19,7 @@ public class PowerStone implements Item {
                 context.getSelectedTarget(),
                 context.getAliveEnemies()
         );
-        user.setSpecialSkillCooldown(savedCooldown); // Cooldown unchanged
+        user.setSpecialSkillCooldown(savedCooldown);
     }
 
     @Override

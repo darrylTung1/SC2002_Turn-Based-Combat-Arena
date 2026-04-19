@@ -2,10 +2,9 @@ package combat.effect;
 
 import combat.model.Combatant;
 
-/**
- * Defend buff — increases defense by 10.
- * Duration: current round + next round (2 turns).
- */
+// Defend buff -> increases defense by 10
+    // Duration: current round + next round [2 turns]
+
 public class DefendBuff extends StatusEffect {
     private static final int DEFENSE_BONUS = 10;
 

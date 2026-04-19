@@ -1,10 +1,9 @@
 package combat.effect;
 
-/**
- * Smoke Bomb effect — incoming attacks deal 0 damage.
- * Duration: current turn + next turn (2 turns).
- * Overrides modifyIncomingDamage() to block all damage.
- */
+// Smoke Bomb effect -> incoming attacks deal 0 damage
+    // Duration: current turn + next turn (2 turns)
+    // Overrides modifyIncomingDamage() to block all damage
+    
 public class SmokeBombEffect extends StatusEffect {
 
     public SmokeBombEffect(int duration) {

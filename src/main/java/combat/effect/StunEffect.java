@@ -1,9 +1,8 @@
 package combat.effect;
 
-/**
- * Stun effect — affected entity cannot take actions.
- * Duration: 2 turns (current turn + next turn).
- */
+// Stun effect -> affected entity cannot take actions
+    // Duration: 2 turns (current turn + next turn)
+
 public class StunEffect extends StatusEffect {
 
     public StunEffect(int duration) {

@@ -10,12 +10,11 @@ import combat.strategy.TurnOrderStrategy;
 import combat.ui.BattleUI;
 import java.util.List;
 
-/**
- * Core battle management engine.
- * DIP: Depends on abstractions (TurnOrderStrategy, Action, BattleUI) — not concrete classes.
- * SRP: Manages battle flow only — no UI creation, no entity creation.
- * OCP: instanceof chains on Action/Item types removed; target resolution delegated to Action.resolveTarget().
- */
+// Core battle management engine 
+    // DIP: Depends on abstractions (TurnOrderStrategy, Action, BattleUI) - not concrete classes
+    // SRP: Manages battle flow only - no UI creation, no entity creation
+    // OCP: instanceof chains on Action/Item types removed; target resolution delegated to Action.resolveTarget()
+
 public class BattleEngine {
     private final TurnOrderStrategy turnOrderStrategy;
     private final BattleUI ui;
@@ -81,10 +80,9 @@ public class BattleEngine {
         }
     }
 
-    /**
-     * Execute a single combatant's turn.
-     * OCP: uses Action.resolveTarget() so no instanceof chains are needed when new Action types are added.
-     */
+    // Execute a single combatant's turn
+        // OCP: uses Action.resolveTarget() so no instanceof chains are needed when new Action types are added
+
     private void executeTurn(Combatant combatant, BattleContext context) {
         Action action = chooseAction(combatant, context);
 
@@ -98,11 +96,10 @@ public class BattleEngine {
         ui.displayActionResult(combatant, action, context, combatants, hpBefore);
     }
 
-    /**
-     * Choose the action for the given combatant.
-     * DIP note: the instanceof dispatch here is unavoidable without adding UI coupling to Combatant.
-     * Isolated to this single method to minimise impact.
-     */
+    // Choose the action for given combatant
+    // [DIP issue] The instanceof dispatch here is unavoidable without adding UI coupling to Combatant.
+        // -> Isolated to this single method to minimise impact
+        
     private Action chooseAction(Combatant combatant, BattleContext context) {
         return switch (combatant) {
             case Player player -> ui.getPlayerAction(player, context);

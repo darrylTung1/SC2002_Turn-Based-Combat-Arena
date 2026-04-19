@@ -8,6 +8,10 @@ import combat.model.Enemy;
 import combat.model.Player;
 import java.util.List;
 
+
+/**
+ * Interface for battle-phase UI only.
+ * ISP: BattleEngine depends on this narrower interface instead of the full GameUI, so it is not forced to depend on setup/end-screen methods it never uses.
 /**
  * Interface for battle-phase UI only.
  * ISP: BattleEngine depends on this narrower interface instead of the full GameUI,
