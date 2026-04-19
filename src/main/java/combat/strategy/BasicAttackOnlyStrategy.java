@@ -5,9 +5,8 @@ import combat.action.BasicAttack;
 import combat.engine.BattleContext;
 import combat.model.Enemy;
 
-/**
- * Default enemy strategy: always perform BasicAttack on the player.
- */
+// Default enemy strategy: always perform BasicAttack on the player
+
 public class BasicAttackOnlyStrategy implements EnemyActionStrategy {
 
     @Override

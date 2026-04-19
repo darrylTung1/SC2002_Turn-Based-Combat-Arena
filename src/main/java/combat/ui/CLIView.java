@@ -16,11 +16,9 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
+// Command-line implementation of GameUI
+    // SRP: Handles only display and input - no game logic
 
-/**
- * Command-line implementation of GameUI.
- * SRP: Handles only display and input — no game logic.
- */
 public class CLIView implements GameUI {
     private final Scanner scanner;
 
