@@ -37,11 +37,6 @@ public class Warrior extends Player {
     }
 
     @Override
-    public String getSpecialSkillDescription() {
-        return "Deal BasicAttack damage to selected enemy. Enemy cannot act for the current and next turn.";
-    }
-
-    @Override
     public Player createFresh() {
         return new Warrior();
     }
