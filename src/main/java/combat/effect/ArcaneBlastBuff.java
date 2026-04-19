@@ -2,11 +2,10 @@ package combat.effect;
 
 import combat.model.Combatant;
 
-/**
- * Arcane Blast buff — tracks ATK bonus gained from Arcane Blast kills.
- * Each kill adds +10 ATK, persisting until end of level.
- * Duration is effectively infinite (Integer.MAX_VALUE); manually expired via expire().
- */
+// Arcane Blast Buff - tracks ATK bonus gained from Arcane Blast kills
+    // Each kill adds +10 ATK, persisting until end of level
+    // Duration is effectively infinite (Integer.MAX_VALUE); manually expired via expire()
+
 public class ArcaneBlastBuff extends StatusEffect {
     private int bonusAttack;
 
@@ -26,7 +25,7 @@ public class ArcaneBlastBuff extends StatusEffect {
 
     @Override
     public void tick(Combatant target) {
-        // Does not expire from ticking — lasts until end of level
+        // Does not expire from ticking; lasts until end of level
     }
 
     @Override
