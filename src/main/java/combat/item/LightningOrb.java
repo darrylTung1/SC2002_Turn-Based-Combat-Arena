@@ -22,7 +22,7 @@ public class LightningOrb implements Item {
             int finalDamage = Math.max(0, damage - enemy.getDefense());
             enemy.takeDamage(enemy.applyDamageModifiers(finalDamage));
 
-            if (enemy.isAlive() && !enemy.hasEffect(ParalysisEffect.class)) {
+            if (enemy.isAlive()) {
                 enemy.addStatusEffect(new ParalysisEffect(2));
             }
         }
