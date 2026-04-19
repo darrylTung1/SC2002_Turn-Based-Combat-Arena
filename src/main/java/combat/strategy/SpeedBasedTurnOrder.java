@@ -5,9 +5,8 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-/**
- * Turn order determined by speed stat (higher speed goes first).
- */
+// Turn order determined by speed stat (higher speed goes first)
+
 public class SpeedBasedTurnOrder implements TurnOrderStrategy {
 
     @Override

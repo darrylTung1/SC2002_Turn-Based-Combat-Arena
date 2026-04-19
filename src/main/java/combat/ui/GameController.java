@@ -9,12 +9,11 @@ import combat.model.Player;
 import combat.strategy.TurnOrderStrategy;
 import java.util.List;
 
-/**
- * Controller that orchestrates the game lifecycle.
- * Connects UI <-> Engine. Handles replay/new-game loop.
- * SRP: Only game flow orchestration.
- * LSP: uses Player.createFresh() instead of instanceof Warrior/Wizard to clone the player.
- */
+// Controller that orchestrates the game lifecycle
+// connects UI <-> Engine. Handles replay/new-game loop
+    // SRP: Only game flow orchestration
+    // LSP: uses Player.createFresh() instead of instanceof Warrior/Wizard to clone the player
+
 public class GameController {
     private final GameUI ui;
     private final TurnOrderStrategy turnOrderStrategy;
