@@ -4,9 +4,8 @@ import combat.engine.BattleContext;
 import combat.model.Combatant;
 import combat.model.Player;
 
-/**
- * Potion — heals 100 HP, capped at max HP.
- */
+// Potion -> heals 100 HP, capped at max HP
+
 public class Potion implements Item {
     private static final int HEAL_AMOUNT = 100;
 

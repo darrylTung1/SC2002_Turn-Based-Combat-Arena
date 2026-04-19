@@ -5,11 +5,10 @@ import combat.model.Goblin;
 import combat.model.Wolf;
 import java.util.List;
 
-/**
- * Difficulty levels.
- * OCP: each difficulty owns its own spawn configuration via abstract methods.
- * Adding a new difficulty only requires adding a new enum constant — no switch statements elsewhere need to change.
- */
+// Difficulty levels
+    // OCP: each difficulty owns its own spawn configuration via abstract methods
+    // Adding a new difficulty only requires adding a new enum constant - no switch statements elsewhere need to change
+
 public enum Difficulty {
 
     EASY("Easy") {

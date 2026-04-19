@@ -5,9 +5,8 @@ import combat.engine.BattleContext;
 import combat.model.Combatant;
 import combat.model.Player;
 
-/**
- * Smoke Bomb — enemy attacks deal 0 damage for current turn + next turn.
- */
+// Smoke Bomb -> enemy attacks deal 0 damage for current turn + next turn
+
 public class SmokeBomb implements Item {
 
     @Override
